@@ -44,7 +44,7 @@ class OutputThreadHandler(threading.Thread):
         self.cond.notify()
         self.cond.release()
     
-    @profile
+    #@profile
     def process(self):
         store_details, store_properties = self.finderModel.getNodeDetails(self.parent_id)
         store_details['properties'] = store_properties
