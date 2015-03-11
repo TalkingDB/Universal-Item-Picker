@@ -1,0 +1,17 @@
+import shutil
+import errno
+import os
+
+curdir = os.getcwd()
+
+src = curdir + '/bath_importer/target'
+dest = '/var/lib/neo4j/data'
+
+try:
+	shutil.copytree(src, dest)
+except OSError as e:
+	
+	if e.errno == errno.ENOTDIR:
+		shutil.copy(src, dest + '/graph.db')
+	else:
+		print('Directory not copied. Error: %s' % e)

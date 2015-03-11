@@ -1,0 +1,5 @@
+[Database]
+neo4j_path: http://ec2-54-163-137-134.compute-1.amazonaws.com:7474/db/data/
+mongodb_host: 192.168.1.92
+mongodb_port: 27017
+mongodb_database: FoodWeaselData
