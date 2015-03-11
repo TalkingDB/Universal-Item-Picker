@@ -33,7 +33,7 @@ outputFolder = root_dir_path + '/Universal_Item_Picker/batch_importer/'
 apiConceptSpace = "foodweasel.com"
 
 #Check to activate or deactivate log writing
-debugging = 1
+debugging = 0
 
 #CSV file names
 nodeFileName = outputFolder + 'nodes.csv'
