@@ -9,7 +9,7 @@ import sys
 import json
 import traceback
 import glob
-import config as c
+import trainingdatapopulator_config as c
 import socket
 import time
 import pickle

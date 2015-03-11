@@ -25,9 +25,10 @@ chunkSize = 500
 root_dir = 'Smarter.Codes'
 user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
 
-root_dir_path = [k for k in user_paths if root_dir == k.split('/')[-1]][0]
+#root_dir_path = [k for k in user_paths if root_dir == k.split('/')[-1]][0]
+root_dir_path = "~/Smarter.Codes/src"
 
-outputFolder = root_dir_path + '/UIP/batch_importer/'
+outputFolder = root_dir_path + '/Universal_Item_Picker/batch_importer/'
 
 apiConceptSpace = "foodweasel.com"
 
