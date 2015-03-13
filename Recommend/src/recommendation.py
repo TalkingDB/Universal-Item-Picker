@@ -26,7 +26,8 @@ class Recommendation():
         print '[' + str(datetime.datetime.now()) + '] executed findNodeIds in recommendation.py/generateRecommendation'
         json_data = user_instruction.commandProcessorHit(self.instruction)
         print '[' + str(datetime.datetime.now()) + '] executed commandPorcessorHit in recommendation.py/generateRecommendation'
-        json_data = json_data.replace('&gt;','>')
+	json_data = json_data.decode('string_escape')
+#        json_data = json_data.replace('&gt;','>')
         instruction_parser = instructionparser.InstructionParser()
         return instruction_parser.parseInstruction(node_ids,json_data, self.concept_space)
         print '[' + str(datetime.datetime.now()) + '] executed parseInstruction in recommendation.py/generateRecommendation'
