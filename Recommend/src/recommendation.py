@@ -13,10 +13,6 @@ GL = gl.GraphLib()
 """
 support for pydev remote debugging
 """
-import sys
-sys.path.append("/usr/lib/python2.7/pysrc")
-import pydevd
-pydevd.settrace('61.12.32.122', port = 5678)
 
 class Recommendation():
 
@@ -25,6 +21,10 @@ class Recommendation():
     
     #@profile
     def generateRecommendation(self,params):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
         import datetime
         print '[' + str(datetime.datetime.now()) + '] received query in recommendation.py/generateRecommendation'
         self.__generateVariables(params)
