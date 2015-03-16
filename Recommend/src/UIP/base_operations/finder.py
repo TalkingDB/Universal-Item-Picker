@@ -199,6 +199,11 @@ class Finder():
         return option_parent_node,total_score,selected_option_ids
     
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         highest_score = 0
         for nodes in item_nodes:
             # print nodes
