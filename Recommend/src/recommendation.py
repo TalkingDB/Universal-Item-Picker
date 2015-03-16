@@ -8,8 +8,15 @@ from UIP.base_operations import instructionparser
 from GraphLib import index as gl
 from UIP import userinstruction
 
-
 GL = gl.GraphLib()
+
+"""
+support for pydev remote debugging
+"""
+import sys
+sys.path.append("/usr/lib/python2.7/pysrc")
+import pydevd
+pydevd.settrace('61.12.32.122', port = 5678)
 
 class Recommendation():
 
