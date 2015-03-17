@@ -542,16 +542,16 @@ class csvCreator():
                     
                     tup = (nodeList[0],makeObtainable,tokenNodeList)
 
-                    import sys
-                    sys.path.append("/usr/lib/python2.7/pysrc")
-                    import pydevd
-                    pydevd.settrace('61.12.32.122', port = 5678)
-                    
                     self.tempAlreadyNERList.append(name)
                     self.tempAlreadyNER[name] = tup
                     
                     return makeObtainable,nodesNER,relationNER,nodeList[0],tokenNodeList
                 else:
+                    import sys
+                    sys.path.append("/usr/lib/python2.7/pysrc")
+                    import pydevd
+                    pydevd.settrace('61.12.32.122', port = 5678)
+
                     if name in self.alreadyNERList:
                         relationNER.append((parentNode, self.alreadyNER[name][0], 'token', '', '', '') )    
                         return self.alreadyNER[name][1],nodesNER,relationNER,self.alreadyNER[name][0],self.alreadyNER[name][2]
