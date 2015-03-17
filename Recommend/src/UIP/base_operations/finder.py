@@ -124,26 +124,18 @@ class Finder():
         pydevd.settrace('61.12.32.122', port = 5678)
         
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
-
-        print '[' + str(datetime.datetime.now()) + '] executed getAllExactMatchNodes in finder.py/process'
         
         pass_bucket = self.generatePassBucket(pass_nodes)
 
-        print '[' + str(datetime.datetime.now()) + '] executed generatePassBucket in finder.py/process'
-
         return_data = self.processParentNode(self.instruction)
 
-        print '[' + str(datetime.datetime.now()) + '] executed processParentNode in finder.py/process'
-        
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
         else :
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
-        print '[' + str(datetime.datetime.now()) + '] executed processSearchedNode in finder.py/process'
 
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
-        print '[' + str(datetime.datetime.now()) + '] executed processSelectedNodes in finder.py/process'
 
         final_bucket = {}
         if pass_bucket :
