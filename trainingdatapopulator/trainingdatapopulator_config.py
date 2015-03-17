@@ -23,11 +23,11 @@ chunkSize = 500
 # if yes than pick up that path if no it will throw list out of index because of [0].
 
 root_dir = 'Smarter.Codes'
-user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
+#user_paths = os.environ['PYTHONPATH'].split(os.pathsep)
 
 #root_dir_path = [k for k in user_paths if root_dir == k.split('/')[-1]][0]
-root_dir_path = "/home/anil.gautam/Smarter.Codes/src"
-
+#root_dir_path = "/home/anil.gautam/Smarter.Codes/src"
+root_dir_path = os.path.expanduser("~/Smarter.Codes/src")
 outputFolder = root_dir_path + '/Universal_Item_Picker/batch_importer/'
 
 apiConceptSpace = "foodweasel.com"
@@ -49,8 +49,8 @@ alreadyNERFile = outputFolder + 'alreadyNER.pkl'
 alreadyNERListFile = outputFolder + 'alreadyNERList.pkl'
 exceptionListFile = outputFolder + 'exceptionList.txt'
 
-#osPath = root_dir_path + '/../customer_files/foodweasel.com/UIP/'
-osPath = '/home/anil.gautam/Smarter.Codes/customer_files/foodweasel.com/UIP/'
+osPath = root_dir_path + '/../customer_files/foodweasel.com/UIP/'
+#osPath = '/home/anil.gautam/Smarter.Codes/customer_files/foodweasel.com/UIP/'
 pathToFiles = osPath + "*.json"
 
 universalNodes = ["next_delivery_time", "geo_tag", "is_rds", "cuisines", "num_ratings", "merchant_type", "street", "is_open", "delivery_percent", "description", "city", "delivery_charge", "short_tag", "zip", "time_needed", "priority", "state", "latitude", "promoted_priority", "type", "laundry_window_minutes", "overall_rating", "last_or_next_order_time", "complete", "distance", "logistics_enabled", "phone", "next_pickup_time", "active", "is_promoted", "recommended_items", "merchant_logo", "type_label", "url", "minutes_left_for_ASAP", "notes", "longitude", "specials", "minimum", "delivery_processes_card", "landmark", "activation_date", "payment_types", "schedule", "price", "increment", "max_qty", "min_qty", "max_price", "max_selection", "min_selection", "sel_dep", "qty_name_singular", "qty_name_plural"]
