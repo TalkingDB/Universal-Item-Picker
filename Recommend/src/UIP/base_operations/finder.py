@@ -83,8 +83,8 @@ class Finder():
     
     
     def processParentNode(self, parent_node):
-#         print parent_node
-#         exit()
+        """ Take input of a CommandNet Hypergraph. Execute the corresponding programming function of CommandNet Hypergraph
+        """
         if parent_node['type'] == 'token':
             token = parent_node['entity']
             user_tokens = token.split(",")
@@ -118,16 +118,15 @@ class Finder():
         
     #@profile
     def process(self):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
-        
+        """
+        Main function in finder.py module which gets called first, and calls rest all functions in finder.py
+        Takes input of 'user instruction' and returns 'matching nodes'
+        """
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
-        
+
         pass_bucket = self.generatePassBucket(pass_nodes)
 
-        return_data = self.processParentNode(self.instruction)
+        return_data = self.processParentNode(self.instruction) #iterate through each CommandNet hypergraph node, starting from NewInstruction Hypergraph
 
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
@@ -626,6 +625,11 @@ class Finder():
     #Processed
     
     def processVagueSizeOf(self,parent_node, return_item_nodes = True):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         user_tokens = []
         item_nodes = []
 
