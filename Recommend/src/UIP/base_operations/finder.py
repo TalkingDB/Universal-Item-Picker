@@ -625,10 +625,6 @@ class Finder():
     #Processed
     
     def processVagueSizeOf(self,parent_node, return_item_nodes = True):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
 
         user_tokens = []
         item_nodes = []
@@ -653,6 +649,7 @@ class Finder():
         if return_item_nodes :
             self.size_check = True
             self.size_token = object_node['entity']
+
             item_nodes = self.processSearchedNode(user_tokens, item_nodes)
         self.size_check = False
         # user_tokens.remove(object_node['entity'])
