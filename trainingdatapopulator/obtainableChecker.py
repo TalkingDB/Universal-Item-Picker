@@ -1,7 +1,7 @@
 __author__="Atul Tagra<atul@ignitras.com>"
 __date__ ="$15 Nov, 2014 9:09:04 PM$"
 
-import config as c
+import trainingdatapopulator_config as c
 
 class obtainableChecker():   
     def __init__(self, data):
