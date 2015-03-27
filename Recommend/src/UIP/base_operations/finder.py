@@ -328,6 +328,10 @@ class Finder():
                 self.__checkSizeWarning(node, user_tokens)
         else :
             self.__checkSizeWarning(item_nodes, user_tokens)
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
 
         # print item_nodes
         # exit()
