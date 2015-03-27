@@ -225,7 +225,7 @@ class Finder():
             import pydevd
             pydevd.settrace('61.12.32.122', port = 5678)            
 
-            tmp_user_tokens = removeSizesFromList(tmp_user_tokens)
+            tmp_user_tokens = self.removeSizesFromList(tmp_user_tokens)
 
             intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
