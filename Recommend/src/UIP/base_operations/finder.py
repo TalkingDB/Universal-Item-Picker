@@ -127,11 +127,6 @@ class Finder():
         pass_bucket = self.generatePassBucket(pass_nodes)
 
         return_data = self.processParentNode(self.instruction) #iterate through each CommandNet hypergraph node, starting from NewInstruction Hypergraph
-# 
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
 
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
@@ -202,11 +197,18 @@ class Finder():
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
 
         highest_score = 0
+        
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+    
         for nodes in item_nodes:
             # print nodes
             list_index = item_nodes.index(nodes)
             match_score = 0
             tmp_user_tokens = user_tokens
+            
             try:
                 tmp_user_tokens.remove("Wikitionary>Large")
             except:
