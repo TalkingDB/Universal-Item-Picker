@@ -139,7 +139,6 @@ class Finder():
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
-        user_tokens.remove("Wikitionary>Large")
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
 
         final_bucket = {}
@@ -207,9 +206,11 @@ class Finder():
             # print nodes
             list_index = item_nodes.index(nodes)
             match_score = 0
-            intersection_list = list(set(nodes["tokens"]).intersection(set(user_tokens)))
+            tmp_user_tokens = user_tokens
+            tmp_user_tokens.remove("Wikitionary>Large")
+            intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
-            user_token_matching = (match_score / len(user_tokens))
+            user_token_matching = (match_score / len(tmp_user_tokens))
             nodes["tokens"] = [x for x in nodes['tokens'] if x != '~NoTag']
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
