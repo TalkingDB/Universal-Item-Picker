@@ -139,6 +139,7 @@ class Finder():
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
+        user_tokens.remove("Wikitionary>Large")
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
 
         final_bucket = {}
