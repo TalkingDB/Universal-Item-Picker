@@ -47,7 +47,9 @@ class Recommendation(APIView):
         
         tmp_return_data = return_data['data'] 
 
-        return_data.sort(key=lambda e: e['children'][0]['children'][0]['warning'], reverse=True)
+        tmp_return_data.sort(key=lambda e: e['children'][0]['children'][0]['warning'], reverse=True)
+
+        return_data['data'] =tmp_return_data 
 
         return return_data
 
