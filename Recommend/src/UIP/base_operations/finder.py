@@ -791,7 +791,7 @@ class Finder():
         item_nodes = []
 
         object_node = self.GL.getChildNodes(parent_node['id'],'param:object')
-        user_tokens = user_tokens + (object_node['entity']).split(",")
+#         user_tokens = user_tokens + (object_node['entity']).split(",")
 
         subject_node = self.GL.getChildNodes(parent_node['id'],'param:subject')
         if(subject_node['type'] == 'hypergraph'):
