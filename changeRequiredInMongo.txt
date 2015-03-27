@@ -30,3 +30,10 @@ db.entity.remove(
     "entity_url" : "Wikitionary>on_the_side"
 }
 )
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Beverage_can","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Bottle","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Pitcher_(container)","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Cup","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Sliced_bread","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Bowl","command":"CommandNet>Noun"})
+db.Entity_to_Command.remove({"entity_url":"DBPedia>Jug","command":"CommandNet>Noun"})
