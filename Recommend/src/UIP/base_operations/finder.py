@@ -658,7 +658,7 @@ class Finder():
 #             item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
             item_nodes = self.processSearchedNode(user_tokens, item_nodes)
         self.size_check = False
-        user_tokens.remove(object_node['entity'])
+#         user_tokens.remove(object_node['entity'])
         return user_tokens, item_nodes
 
     #Processed
