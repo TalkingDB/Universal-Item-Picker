@@ -128,6 +128,11 @@ class Finder():
 
         return_data = self.processParentNode(self.instruction) #iterate through each CommandNet hypergraph node, starting from NewInstruction Hypergraph
 
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
         else :
@@ -328,10 +333,6 @@ class Finder():
                 self.__checkSizeWarning(node, user_tokens)
         else :
             self.__checkSizeWarning(item_nodes, user_tokens)
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
 
         # print item_nodes
         # exit()
