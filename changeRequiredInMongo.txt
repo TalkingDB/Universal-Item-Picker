@@ -1,0 +1,32 @@
+db.entity.insert(
+{
+    "approved_by_trainer" : [ 
+        NumberLong(1)
+    ],
+    "entity_url" : "Wikitionary>Remove",
+    "intended_trainer" : "commonsense_linguist",
+    "surface_text" : "no"
+}
+)
+db.Entity_to_Command.insert(
+{
+    "entity_url" : "Wikitionary>Remove",
+    "command" : "CommandNet>RemoveX",
+    "how_this_record" : "CommandNetTraining"
+}
+)
+db.entity.remove(
+{
+    "entity_url" : "Wikitionary>Order"
+}
+)
+db.entity.find(
+{
+    "entity_url" : "Wikitionary>Order"
+}
+)
+db.entity.remove(
+{
+    "entity_url" : "Wikitionary>on_the_side"
+}
+)
