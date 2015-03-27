@@ -139,7 +139,7 @@ class Finder():
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
-61.12.32.122        selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
+        selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
 
         final_bucket = {}
         if pass_bucket :
