@@ -725,17 +725,8 @@ class Finder():
                 if(set(user_tokens).intersection(set(node['tokens'])) == set(user_tokens)):
                     final_nodes.append(node)
         return user_tokens, final_nodes
-<<<<<<< HEAD
-   
+
     def processRemoveX(self,parent_node, return_item_nodes = True):
-=======
-    
-<<<<<<< HEAD
-    def processRemoveX(self,parent_node, return_item_nodes = True):
-=======
-    def processRemoveX(self,parent_node):
->>>>>>> refs/heads/debugging
->>>>>>> 6d33cb9fc40a006f7e1832900cfa4b66983fee27
         # @TODO : Logics for this part need to be prepared. It will be coded later
         user_tokens = []
         item_nodes = []
