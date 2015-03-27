@@ -705,7 +705,7 @@ class Finder():
                     final_nodes.append(node)
         return user_tokens, final_nodes
     
-    def processRemove(self,parent_node):
+    def processRemoveX(self,parent_node, return_item_nodes = True):
         # @TODO : Logics for this part need to be prepared. It will be coded later
         user_tokens = []
         item_nodes = []
