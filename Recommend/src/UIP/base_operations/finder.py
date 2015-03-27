@@ -207,7 +207,7 @@ class Finder():
             # print nodes
             list_index = item_nodes.index(nodes)
             match_score = 0
-            tmp_user_tokens = x for x in user_tokens
+            tmp_user_tokens = [x for x in user_tokens]
             
             try:
                 tmp_user_tokens.remove("Wikitionary>Large")
