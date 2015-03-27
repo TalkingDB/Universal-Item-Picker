@@ -194,16 +194,37 @@ class Finder():
         total_score = 0;
         return option_parent_node,total_score,selected_option_ids
     
+    def removeSizesFromList(self,user_tokens):
+        try:
+            user_tokens.remove("Wikitionary>Large")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Medium")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Small")
+        except:
+            pass
+        return user_tokens
+        
+        
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
 
         highest_score = 0
+    
         for nodes in item_nodes:
             # print nodes
             list_index = item_nodes.index(nodes)
             match_score = 0
-            intersection_list = list(set(nodes["tokens"]).intersection(set(user_tokens)))
+            tmp_user_tokens = [x for x in user_tokens]
+
+            tmp_user_tokens = self.removeSizesFromList(tmp_user_tokens)
+
+            intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
-            user_token_matching = (match_score / len(user_tokens))
+            user_token_matching = (match_score / len(tmp_user_tokens))
             nodes["tokens"] = [x for x in nodes['tokens'] if x != '~NoTag']
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
@@ -328,10 +349,6 @@ class Finder():
                 self.__checkSizeWarning(node, user_tokens)
         else :
             self.__checkSizeWarning(item_nodes, user_tokens)
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
 
         # print item_nodes
         # exit()
@@ -654,9 +671,10 @@ class Finder():
             self.size_check = True
             self.size_token = object_node['entity']
 
+#             item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
             item_nodes = self.processSearchedNode(user_tokens, item_nodes)
         self.size_check = False
-        # user_tokens.remove(object_node['entity'])
+#         user_tokens.remove(object_node['entity'])
         return user_tokens, item_nodes
 
     #Processed
@@ -707,8 +725,17 @@ class Finder():
                 if(set(user_tokens).intersection(set(node['tokens'])) == set(user_tokens)):
                     final_nodes.append(node)
         return user_tokens, final_nodes
+<<<<<<< HEAD
    
     def processRemoveX(self,parent_node, return_item_nodes = True):
+=======
+    
+<<<<<<< HEAD
+    def processRemoveX(self,parent_node, return_item_nodes = True):
+=======
+    def processRemoveX(self,parent_node):
+>>>>>>> refs/heads/debugging
+>>>>>>> 6d33cb9fc40a006f7e1832900cfa4b66983fee27
         # @TODO : Logics for this part need to be prepared. It will be coded later
         user_tokens = []
         item_nodes = []
