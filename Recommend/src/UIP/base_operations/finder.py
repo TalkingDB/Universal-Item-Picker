@@ -83,8 +83,8 @@ class Finder():
     
     
     def processParentNode(self, parent_node):
-#         print parent_node
-#         exit()
+        """ Take input of a CommandNet Hypergraph. Execute the corresponding programming function of CommandNet Hypergraph
+        """
         if parent_node['type'] == 'token':
             token = parent_node['entity']
             user_tokens = token.split(",")
@@ -118,27 +118,23 @@ class Finder():
         
     #@profile
     def process(self):
+        """
+        Main function in finder.py module which gets called first, and calls rest all functions in finder.py
+        Takes input of 'user instruction' and returns 'matching nodes'
+        """
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
 
-        print '[' + str(datetime.datetime.now()) + '] executed getAllExactMatchNodes in finder.py/process'
-        
         pass_bucket = self.generatePassBucket(pass_nodes)
 
-        print '[' + str(datetime.datetime.now()) + '] executed generatePassBucket in finder.py/process'
+        return_data = self.processParentNode(self.instruction) #iterate through each CommandNet hypergraph node, starting from NewInstruction Hypergraph
 
-        return_data = self.processParentNode(self.instruction)
-
-        print '[' + str(datetime.datetime.now()) + '] executed processParentNode in finder.py/process'
-        
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
         else :
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
-        print '[' + str(datetime.datetime.now()) + '] executed processSearchedNode in finder.py/process'
 
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
-        print '[' + str(datetime.datetime.now()) + '] executed processSelectedNodes in finder.py/process'
 
         final_bucket = {}
         if pass_bucket :
@@ -198,15 +194,37 @@ class Finder():
         total_score = 0;
         return option_parent_node,total_score,selected_option_ids
     
+    def removeSizesFromList(self,user_tokens):
+        try:
+            user_tokens.remove("Wikitionary>Large")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Medium")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Small")
+        except:
+            pass
+        return user_tokens
+        
+        
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
+
         highest_score = 0
+    
         for nodes in item_nodes:
             # print nodes
             list_index = item_nodes.index(nodes)
             match_score = 0
-            intersection_list = list(set(nodes["tokens"]).intersection(set(user_tokens)))
+            tmp_user_tokens = [x for x in user_tokens]
+
+            tmp_user_tokens = self.removeSizesFromList(tmp_user_tokens)
+
+            intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
-            user_token_matching = (match_score / len(user_tokens))
+            user_token_matching = (match_score / len(tmp_user_tokens))
             nodes["tokens"] = [x for x in nodes['tokens'] if x != '~NoTag']
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
@@ -628,6 +646,7 @@ class Finder():
     #Processed
     
     def processVagueSizeOf(self,parent_node, return_item_nodes = True):
+
         user_tokens = []
         item_nodes = []
 
@@ -651,9 +670,11 @@ class Finder():
         if return_item_nodes :
             self.size_check = True
             self.size_token = object_node['entity']
+
+#             item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
             item_nodes = self.processSearchedNode(user_tokens, item_nodes)
         self.size_check = False
-        # user_tokens.remove(object_node['entity'])
+#         user_tokens.remove(object_node['entity'])
         return user_tokens, item_nodes
 
     #Processed
@@ -705,7 +726,11 @@ class Finder():
                     final_nodes.append(node)
         return user_tokens, final_nodes
     
+<<<<<<< HEAD
     def processRemoveX(self,parent_node, return_item_nodes = True):
+=======
+    def processRemoveX(self,parent_node):
+>>>>>>> refs/heads/debugging
         # @TODO : Logics for this part need to be prepared. It will be coded later
         user_tokens = []
         item_nodes = []

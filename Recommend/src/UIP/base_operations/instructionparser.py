@@ -61,10 +61,6 @@ class InstructionParser():
 #         exit()
 #         print processed_instruction
 #         exit()
-#        import sys
-#        sys.path.append("/usr/lib/python2.7/pysrc")
-#        import pydevd
-#        pydevd.settrace('61.12.32.122', port = 5678)
 
         if processed_instruction:
             return self.getShortlistedParent(processed_instruction, concept_space)

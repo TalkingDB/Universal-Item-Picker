@@ -38,6 +38,14 @@ class Recommendation(APIView):
             return_data['error'] = "Error:"+str(e)
         t2 = time.time()
 	print 'in UIP/CSAPI/csrestapi/recommendations.py. r.generateRecommendation took ' + str(t2-t1) + ' time'
+
+        """
+        sort with 'warnings' flag. the stores with no warnings will appear first
+        """        
+        tmp_return_data = return_data['data'] 
+        tmp_return_data.sort(key=lambda e: e['children'][0]['children'][0]['warning'], reverse=False)
+        return_data['data'] =tmp_return_data 
+
         return return_data
 
     def post(self, request, action, format=None):
