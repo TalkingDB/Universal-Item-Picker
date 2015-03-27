@@ -220,11 +220,6 @@ class Finder():
             match_score = 0
             tmp_user_tokens = [x for x in user_tokens]
 
-            import sys
-            sys.path.append("/usr/lib/python2.7/pysrc")
-            import pydevd
-            pydevd.settrace('61.12.32.122', port = 5678)            
-
             tmp_user_tokens = self.removeSizesFromList(tmp_user_tokens)
 
             intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
