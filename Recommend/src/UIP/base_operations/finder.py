@@ -127,11 +127,11 @@ class Finder():
         pass_bucket = self.generatePassBucket(pass_nodes)
 
         return_data = self.processParentNode(self.instruction) #iterate through each CommandNet hypergraph node, starting from NewInstruction Hypergraph
-
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+# 
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
 
         if isinstance(return_data,dict) :
             return dict(pass_bucket, **return_data)
@@ -635,7 +635,7 @@ class Finder():
         item_nodes = []
 
         object_node = self.GL.getChildNodes(parent_node['id'],'param:object')
-#         user_tokens.append(object_node['entity'])
+        user_tokens.append(object_node['entity'])
         subject_node = self.GL.getChildNodes(parent_node['id'],'param:subject')
         if(subject_node['type'] == 'hypergraph'):
             command = "process" + (subject_node['command']).replace("CommandNet>","")
@@ -655,9 +655,10 @@ class Finder():
             self.size_check = True
             self.size_token = object_node['entity']
 
-            item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
+#             item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
+            item_nodes = self.processSearchedNode(user_tokens, item_nodes)
         self.size_check = False
-        # user_tokens.remove(object_node['entity'])
+        user_tokens.remove(object_node['entity'])
         return user_tokens, item_nodes
 
     #Processed
