@@ -207,7 +207,10 @@ class Finder():
             list_index = item_nodes.index(nodes)
             match_score = 0
             tmp_user_tokens = user_tokens
-            tmp_user_tokens.remove("Wikitionary>Large")
+            try:
+                tmp_user_tokens.remove("Wikitionary>Large")
+            except:
+                pass
             intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
             user_token_matching = (match_score / len(tmp_user_tokens))
