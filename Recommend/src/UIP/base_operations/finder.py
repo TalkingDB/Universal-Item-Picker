@@ -139,7 +139,7 @@ class Finder():
             user_tokens, item_nodes = return_data
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
-        selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
+61.12.32.122        selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
 
         final_bucket = {}
         if pass_bucket :
@@ -635,7 +635,7 @@ class Finder():
         item_nodes = []
 
         object_node = self.GL.getChildNodes(parent_node['id'],'param:object')
-        user_tokens.append(object_node['entity'])
+#         user_tokens.append(object_node['entity'])
         subject_node = self.GL.getChildNodes(parent_node['id'],'param:subject')
         if(subject_node['type'] == 'hypergraph'):
             command = "process" + (subject_node['command']).replace("CommandNet>","")
@@ -655,7 +655,7 @@ class Finder():
             self.size_check = True
             self.size_token = object_node['entity']
 
-            item_nodes = self.processSearchedNode(user_tokens, item_nodes)
+            item_nodes = self.processSearchedNode(object_node['entity'], item_nodes)
         self.size_check = False
         # user_tokens.remove(object_node['entity'])
         return user_tokens, item_nodes
