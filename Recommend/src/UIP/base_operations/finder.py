@@ -194,14 +194,25 @@ class Finder():
         total_score = 0;
         return option_parent_node,total_score,selected_option_ids
     
+    def removeSizesFromList(self,user_tokens):
+        try:
+            user_tokens.remove("Wikitionary>Large")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Medium")
+        except:
+            pass
+        try:
+            user_tokens.remove("Wikitionary>Small")
+        except:
+            pass
+        return user_tokens
+        
+        
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
 
         highest_score = 0
-        
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
     
         for nodes in item_nodes:
             # print nodes
@@ -209,10 +220,8 @@ class Finder():
             match_score = 0
             tmp_user_tokens = [x for x in user_tokens]
             
-            try:
-                tmp_user_tokens.remove("Wikitionary>Large")
-            except:
-                pass
+            tmp_user_tokens = removeSizesFromList(tmp_user_tokens)
+
             intersection_list = list(set(nodes["tokens"]).intersection(set(tmp_user_tokens)))
             match_score += len(intersection_list)
             user_token_matching = (match_score / len(tmp_user_tokens))
