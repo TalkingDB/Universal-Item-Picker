@@ -38,11 +38,14 @@ class Recommendation(APIView):
             return_data['error'] = "Error:"+str(e)
         t2 = time.time()
 	print 'in UIP/CSAPI/csrestapi/recommendations.py. r.generateRecommendation took ' + str(t2-t1) + ' time'
+
         
         import sys
         sys.path.append("/usr/lib/python2.7/pysrc")
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
+
+        return_data.sort(key=lambda e: e['children'][0]['children'][0]['warning'], reverse=True)
 
         return return_data
 
