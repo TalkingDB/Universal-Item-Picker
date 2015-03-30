@@ -81,8 +81,12 @@ class InstructionParser():
         myQueue = Queue.Queue()
         finished_queue = Queue.Queue()
         basket = {}
-        for buket in bukets:
-            for k, v in buket.items():
+        
+        """
+        group items by their store ID
+        """
+        for buket in bukets: #loop for each instruction
+            for k, v in buket.items(): #loop for each item found in given instruction
                 if basket.has_key(k):
 
                     key = k
