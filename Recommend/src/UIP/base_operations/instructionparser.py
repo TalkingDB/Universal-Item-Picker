@@ -65,10 +65,6 @@ class InstructionParser():
 #         print processed_instruction
 #         exit()
   
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
         """
         Items found. Find their store details now 
         """
@@ -97,6 +93,11 @@ class InstructionParser():
                     basket[key] = (count, val)
                 else:
                     basket[k] = (1, v)
+
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
 
         max_value = max(basket.iteritems(), key=operator.itemgetter(1))[1][0]
         store = {}

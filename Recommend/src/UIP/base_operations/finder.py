@@ -174,10 +174,10 @@ class Finder():
         return nodes
     
     def generatePassBucket(self, item_nodes, node_instruction = None):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
 
         selected_bucket = {}
         for the_node in item_nodes:
