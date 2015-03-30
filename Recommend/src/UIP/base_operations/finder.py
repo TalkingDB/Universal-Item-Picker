@@ -286,6 +286,8 @@ class Finder():
             del item_nodes[list_index]
             item_nodes.insert(list_index,nodes)
 
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         selected_bucket = {}
         threshold_limit = self.threshold_limit_percent * highest_score
         for node in item_nodes:
