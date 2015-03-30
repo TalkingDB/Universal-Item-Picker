@@ -155,10 +155,10 @@ class Finder():
         nodes = self.finderModel.findNodesByName(separated_node_ids,text)
         tmpDict = {}
 
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
 
         for i in xrange(len(nodes)):
             tmpDict = nodes[i]

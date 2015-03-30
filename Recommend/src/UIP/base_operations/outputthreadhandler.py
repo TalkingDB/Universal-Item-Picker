@@ -57,10 +57,10 @@ class OutputThreadHandler(threading.Thread):
         found_instructions = []
         highest_score_of_this_store = 0
         
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)        
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)        
 
         for node in self.val[1]:
             node_id = node['search_node']['id']
