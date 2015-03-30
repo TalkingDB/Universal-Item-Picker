@@ -64,6 +64,9 @@ class OutputThreadHandler(threading.Thread):
 
         for node in self.val[1]:
             node_id = node['search_node']['id']
+            
+            if not 'score' in node.keys():
+                node['score'] = 2
             highest_score_of_this_store = node['score'] if node['score'] > highest_score_of_this_store else 0
             if node_id in all_node_ids :
                 duplicate_node_ids.append(node_id)
