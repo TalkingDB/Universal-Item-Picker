@@ -262,7 +262,7 @@ class Finder():
             else :
                 nodes['instruction'] = node_instruction
             
-            if (average_score > highest_score) and (average_score) < 2 :
+            if (average_score > highest_score) and (average_score) <= 2 :
                 highest_score = average_score
             nodes['score'] = average_score
             nodes['selected_options'] = selected_option_ids

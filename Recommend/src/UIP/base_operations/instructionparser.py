@@ -107,6 +107,12 @@ class InstructionParser():
             finished_queue.task_done()
 #         print "here"
 #         exit()
+
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         return self.prepareList(store.values())
     
     def prepareList(self,hierarchy):
