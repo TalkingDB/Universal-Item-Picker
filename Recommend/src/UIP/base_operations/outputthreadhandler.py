@@ -74,7 +74,7 @@ class OutputThreadHandler(threading.Thread):
                     'warning': node['warning'],
                     'not_found': node['not_found'],
                     'quantity': node['quantity'] if 'quantity' in node else 1,
-                    'instruction' : node['instruction']
+                    'instruction' : node['instruction'],
                     'score' : node['score']
                 })
             else :
@@ -84,7 +84,7 @@ class OutputThreadHandler(threading.Thread):
                     'warning': node['warning'],
                     'not_found': node['not_found'],
                     'quantity': node['quantity'] if 'quantity' in node else 1,
-                    'instruction' : node['instruction']
+                    'instruction' : node['instruction'],
                     'score' : node['score']
                 }
             
