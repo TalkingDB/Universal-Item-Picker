@@ -75,6 +75,7 @@ class OutputThreadHandler(threading.Thread):
                     'not_found': node['not_found'],
                     'quantity': node['quantity'] if 'quantity' in node else 1,
                     'instruction' : node['instruction']
+                    'score' : node['score']
                 })
             else :
                 all_node_ids.append(node_id)
@@ -84,6 +85,7 @@ class OutputThreadHandler(threading.Thread):
                     'not_found': node['not_found'],
                     'quantity': node['quantity'] if 'quantity' in node else 1,
                     'instruction' : node['instruction']
+                    'score' : node['score']
                 }
             
             found_instructions.append(node['instruction'])
