@@ -174,6 +174,11 @@ class Finder():
         return nodes
     
     def generatePassBucket(self, item_nodes, node_instruction = None):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         selected_bucket = {}
         for node in item_nodes:
             self.pass_bucket_id.append(str(node['search_node']['id']))
