@@ -152,7 +152,12 @@ class Finder():
     
     def getAllExactMatchNodes(self, text):
         separated_node_ids = ",".join(str(x) for x in self.node_ids)
-        return self.finderModel.findNodesByName(separated_node_ids,text)
+        nodes = self.finderModel.findNodesByName(separated_node_ids,text)
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+        return nodes
     
     def generatePassBucket(self, item_nodes, node_instruction = None):
         selected_bucket = {}
