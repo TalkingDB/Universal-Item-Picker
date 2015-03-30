@@ -154,14 +154,16 @@ class Finder():
         separated_node_ids = ",".join(str(x) for x in self.node_ids)
         nodes = self.finderModel.findNodesByName(separated_node_ids,text)
         tmpDict = {}
-        for i in xrange(len(nodes)):
-            tmpDict = nodes[i]
-            tmpDict['score'] = 2
-            nodes[i] = tmpDict
+
         import sys
         sys.path.append("/usr/lib/python2.7/pysrc")
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
+
+        for i in xrange(len(nodes)):
+            tmpDict = nodes[i]
+            tmpDict['score'] = 2
+            nodes[i] = tmpDict
         
         return nodes
     
