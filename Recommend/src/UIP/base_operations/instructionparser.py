@@ -36,6 +36,9 @@ class InstructionParser():
 #         print "here", all_instruction
 #         exit()
         self.all_instruction_labels = []
+        """
+        for each instruction. create a new thread
+        """
         for i in all_instruction:
             myQueue.put(all_instruction[i])
             self.all_instruction_labels.append(all_instruction[i]['label'])
@@ -66,7 +69,9 @@ class InstructionParser():
         sys.path.append("/usr/lib/python2.7/pysrc")
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
-
+        """
+        Items found. Find their store details now 
+        """
         if processed_instruction:
             return self.getShortlistedParent(processed_instruction, concept_space)
         else:
@@ -91,6 +96,10 @@ class InstructionParser():
 
         max_value = max(basket.iteritems(), key=operator.itemgetter(1))[1][0]
         store = {}
+        
+        """
+        for each new store, create a new thread
+        """
         for parent_id, val in basket.iteritems():
             if val[0]==max_value:
                 myQueue.put((parent_id,val))
