@@ -123,10 +123,10 @@ class Finder():
         Takes input of 'user instruction' and returns 'matching nodes'
         """
                     
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
 
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
 
