@@ -46,16 +46,14 @@ class Recommendation():
         self.instruction = params['instruction']
     
     def __sortStoreWithScore(self,stores_and_items):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
-        
-        highest_score_for_particular_instruction = {} #for each instruction, it stores the highest score attained by an item
+
         tmp_stores_and_items = []
          
         for store in stores_and_items:
             store_item_groups = store['children'] 
+
+            highest_score_for_particular_instruction = {} #for each instruction, it stores the highest score attained by an item
+
             for item_group in store_item_groups:
                 store_items = item_group['children']
                 for store_item in store_items:
@@ -68,6 +66,11 @@ class Recommendation():
             
             store_score = sum(highest_score_for_particular_instruction.values())
                 
+            import sys
+            sys.path.append("/usr/lib/python2.7/pysrc")
+            import pydevd
+            pydevd.settrace('61.12.32.122', port = 5678)
+            
             store['score'] = store_score
             tmp_stores_and_items.append(store)
         
