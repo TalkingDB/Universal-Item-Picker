@@ -32,14 +32,26 @@ class Recommendation():
 	json_data = json_data.decode('string_escape')
 #        json_data = json_data.replace('&gt;','>')
         instruction_parser = instructionparser.InstructionParser()
-        return instruction_parser.parseInstruction(node_ids,json_data, self.concept_space)
+        result_stores_and_their_items_with_options = instruction_parser.parseInstruction(node_ids,json_data, self.concept_space)
         print '[' + str(datetime.datetime.now()) + '] executed parseInstruction in recommendation.py/generateRecommendation'
+        
+        self.__sortWithScore(result_stores_and_their_items_with_options)
+        
+        return result_stores_and_their_items_with_options
     
     def __generateVariables(self,params):
         self.concept_space = params['concept_space']
         self.key = params['parent']['key']
         self.values = params['parent']['value']
         self.instruction = params['instruction']
+    
+    def __sortWithScore(self,stores_and_items):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+        print stores_and_items
+        
  
 # r = Recommendation()
 #  
