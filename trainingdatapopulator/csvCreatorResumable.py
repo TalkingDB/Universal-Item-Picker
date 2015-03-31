@@ -557,7 +557,7 @@ class csvCreator():
                         return self.alreadyNER[name][1],self.alreadyNER[name][3],relationNER,self.alreadyNER[name][0],self.alreadyNER[name][2]
                     elif name in self.tempAlreadyNERList:
                         relationNER.append((parentNode, self.tempAlreadyNER[name][0], 'token', '', '', '') )    
-                        return self.tempAlreadyNER[name][1],self.alreadyNER[name][3],relationNER,self.tempAlreadyNER[name][0],self.tempAlreadyNER[name][2]
+                        return self.tempAlreadyNER[name][1],self.tempAlreadyNER[name][3],relationNER,self.tempAlreadyNER[name][0],self.tempAlreadyNER[name][2]
                         
             else:
                 return 'False',[],[],'',[]

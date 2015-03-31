@@ -231,6 +231,8 @@ class Finder():
             pass
         try:
             user_tokens.remove("Wikitionary>Small")
+        except:
+            pass
         try:
             user_tokens.remove("Foodweasel>Party_order")
         except:
