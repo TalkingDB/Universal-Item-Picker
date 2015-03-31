@@ -35,9 +35,9 @@ class Recommendation():
         result_stores_and_their_items_with_options = instruction_parser.parseInstruction(node_ids,json_data, self.concept_space)
         print '[' + str(datetime.datetime.now()) + '] executed parseInstruction in recommendation.py/generateRecommendation'
         
-        self.__sortStoreWithScore(result_stores_and_their_items_with_options)
+        sorted_stores = self.__sortStoreWithScore(result_stores_and_their_items_with_options)
         
-        return result_stores_and_their_items_with_options
+        return sorted_stores
     
     def __generateVariables(self,params):
         self.concept_space = params['concept_space']
