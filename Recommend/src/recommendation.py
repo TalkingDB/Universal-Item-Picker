@@ -60,7 +60,7 @@ class Recommendation():
                 store_items = item_group['children']
                 for store_item in store_items:
                     instruction = store_item['instruction']
-                    if not 'instruction' in highest_score_for_particular_instruction.keys():
+                    if not instruction in highest_score_for_particular_instruction.keys():
                         highest_score_for_particular_instruction[instruction] = store_item['score']
                     else:
                         if highest_score_for_particular_instruction[instruction] < store_item['score']:
