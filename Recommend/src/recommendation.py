@@ -66,15 +66,15 @@ class Recommendation():
             
             store_score = sum(highest_score_for_particular_instruction.values())
                 
-            import sys
-            sys.path.append("/usr/lib/python2.7/pysrc")
-            import pydevd
-            pydevd.settrace('61.12.32.122', port = 5678)
+#             import sys
+#             sys.path.append("/usr/lib/python2.7/pysrc")
+#             import pydevd
+#             pydevd.settrace('61.12.32.122', port = 5678)
             
             store['score'] = store_score
             tmp_stores_and_items.append(store)
         
-        sorted_stores =  sorted(tmp_stores_and_items,key=lambda particular_store: particular_store['score'])
+        sorted_stores =  sorted(tmp_stores_and_items,key=lambda particular_store: particular_store['score'],reverse=True)
         
         return sorted_stores
     
