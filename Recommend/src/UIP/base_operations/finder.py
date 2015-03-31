@@ -168,7 +168,7 @@ class Finder():
 
         for i in xrange(len(nodes)):
             tmpDict = nodes[i]
-            tmpDict['score'] = 2
+            tmpDict['score'] = 2.1
             nodes[i] = tmpDict
         
         return nodes
