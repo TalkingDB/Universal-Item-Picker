@@ -184,7 +184,7 @@ class Finder():
         for the_node in item_nodes:
             self.pass_bucket_id.append(str(the_node['search_node']['id']))
             node = {}
-            node['selected_options'] = {}
+            the_node['selected_options'] = {}
             parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,the_node['search_node']['id'])
 #             print parent_id
             if the_node['search_node']['type'] == 'option':
