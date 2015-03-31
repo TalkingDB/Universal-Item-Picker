@@ -123,11 +123,6 @@ class Finder():
         Takes input of 'user instruction' and returns 'matching nodes'
         """
                     
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
-
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
 
         pass_bucket = self.generatePassBucket(pass_nodes)
@@ -155,6 +150,10 @@ class Finder():
                 if i not in final_bucket :
                     final_bucket[i] = selected_nodes[i]
         
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
         return final_bucket
     
     def getAllExactMatchNodes(self, text):
