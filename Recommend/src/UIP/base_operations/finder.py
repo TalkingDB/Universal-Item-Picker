@@ -188,7 +188,7 @@ class Finder():
             parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,the_node['search_node']['id'])
 #             print parent_id
             if the_node['search_node']['type'] == 'option':
-                node,total_score,selected_option_ids = self.convertOptionToItem(node, 1, {})
+                node,total_score,selected_option_ids = self.convertOptionToItem(the_node, 1, {})
                 node['selected_options'] = selected_option_ids
             node['not_found'] = []
             node['warning'] = {}
