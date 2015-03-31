@@ -122,6 +122,12 @@ class Finder():
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
         Takes input of 'user instruction' and returns 'matching nodes'
         """
+                    
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         pass_nodes = self.getAllExactMatchNodes(self.instruction['label'])
 
         pass_bucket = self.generatePassBucket(pass_nodes)
@@ -148,11 +154,6 @@ class Finder():
             for i in selected_nodes :
                 if i not in final_bucket :
                     final_bucket[i] = selected_nodes[i]
-                    
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
         
         return final_bucket
     
