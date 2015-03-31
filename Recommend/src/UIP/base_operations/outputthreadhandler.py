@@ -57,10 +57,10 @@ class OutputThreadHandler(threading.Thread):
         found_instructions = []
 #         highest_score_of_this_store = 0
         
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)        
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)        
 
         for node in self.val[1]:
             node_id = node['search_node']['id']
@@ -97,10 +97,10 @@ class OutputThreadHandler(threading.Thread):
             
             found_instructions.append(node['instruction'])
         
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)        
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)        
 
         not_found_instructions = list(set(self.all_instruction_labels) - set(found_instructions))
         store_details['children'] = self.finderModel.findNodeChildren(all_node_ids, keys,add_new_keys, self.concept_space)
