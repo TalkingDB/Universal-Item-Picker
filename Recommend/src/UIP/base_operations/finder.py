@@ -180,14 +180,14 @@ class Finder():
 #         pydevd.settrace('61.12.32.122', port = 5678)
 
         selected_bucket = {}
-        for the_node in item_nodes:
-            self.pass_bucket_id.append(str(the_node['search_node']['id']))
-            node = {}
-            the_node['selected_options'] = {}
-            parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,the_node['search_node']['id'])
+        for node in item_nodes:
+            self.pass_bucket_id.append(str(node['search_node']['id']))
+            node['selected_options'] = {}
+            score_cache = node['score']
+            parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,node['search_node']['id'])
 #             print parent_id
-            if the_node['search_node']['type'] == 'option':
-                node,total_score,selected_option_ids = self.convertOptionToItem(the_node, 1, {})
+            if node['search_node']['type'] == 'option':
+                node,total_score,selected_option_ids = self.convertOptionToItem(node, 1, {})
                 node['selected_options'] = selected_option_ids
             node['not_found'] = []
             node['warning'] = {}
@@ -195,7 +195,7 @@ class Finder():
                 node['instruction'] = self.instruction['label']
             else :
                 node['instruction'] = node_instruction
-            node['score'] = the_node['score']
+            node['score'] = score_cache
             if parent_id not in selected_bucket:
                 selected_bucket[parent_id] = []
             selected_bucket[parent_id].append(node)
