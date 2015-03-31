@@ -55,7 +55,7 @@ class OutputThreadHandler(threading.Thread):
         add_new_keys = {}
         duplicate_add_new_keys = {}
         found_instructions = []
-        highest_score_of_this_store = 0
+#         highest_score_of_this_store = 0
         
         import sys
         sys.path.append("/usr/lib/python2.7/pysrc")
@@ -65,10 +65,10 @@ class OutputThreadHandler(threading.Thread):
         for node in self.val[1]:
             node_id = node['search_node']['id']
             
-            if not 'score' in node.keys():
-                node['score'] = 2
-            if node['score'] > highest_score_of_this_store:
-                highest_score_of_this_store = node['score']
+#             if not 'score' in node.keys():
+#                 node['score'] = 2
+#             if node['score'] > highest_score_of_this_store:
+#                 highest_score_of_this_store = node['score']
 
             if node_id in all_node_ids :
                 duplicate_node_ids.append(node_id)
@@ -104,7 +104,7 @@ class OutputThreadHandler(threading.Thread):
 
         not_found_instructions = list(set(self.all_instruction_labels) - set(found_instructions))
         store_details['children'] = self.finderModel.findNodeChildren(all_node_ids, keys,add_new_keys, self.concept_space)
-        store_details['score'] = highest_score_of_this_store
+#         store_details['score'] = highest_score_of_this_store
         if duplicate_node_ids :
             store_details['children'] = self.processDuplicateNodeIds(duplicate_node_ids, duplicate_keys, duplicate_add_new_keys,self.concept_space, store_details['children'])
         store_details['not_found'] = not_found_instructions
