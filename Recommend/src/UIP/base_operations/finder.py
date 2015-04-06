@@ -264,7 +264,7 @@ class Finder():
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
             if user_token_matching >= 0.5:
-                total_score = user_token_matching + menu_token_matching
+                total_score = user_token_matching + menu_token_matching/2
             else:
                 total_score = 0
                 
@@ -293,7 +293,7 @@ class Finder():
             else :
                 nodes['instruction'] = node_instruction
             
-            if (average_score > highest_score) and (average_score) < 2 :
+            if (average_score > highest_score) and (average_score) < 1.5 :
                 highest_score = average_score
             nodes['score'] = average_score
             nodes['selected_options'] = selected_option_ids
