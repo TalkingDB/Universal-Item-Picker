@@ -460,7 +460,7 @@ class Finder():
 #         print node_level
 #         print len(all_nodes)
 #         exit()
-        all_nodes.remove
+
         if node_level == 0 or node_level == 1 :
             selected_check = False
             selected_bucket = {}
