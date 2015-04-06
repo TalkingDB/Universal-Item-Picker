@@ -327,6 +327,7 @@ class Finder():
         highest_score = average_score if highest_score == 0 and average_score > 0 else highest_score
         
         threshold_limit = self.threshold_limit_percent * highest_score
+        threshold_limit = 0.01
         for node in item_nodes:
             if(node['score'] >= threshold_limit) and (threshold_limit >0):
                 parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,node['search_node']['id'])
