@@ -46,7 +46,7 @@ class Finder():
         self.exhausted_node_id = []
         self.size_check = False
         self.concept_space = "foodweasel.com"
-        self.threshold_limit_percent = 0.8
+        self.threshold_limit_percent = 0.55
         self.deep_down_percent_decrease = 0.2
         
     def processNode(self,child_nodes):
@@ -118,10 +118,10 @@ class Finder():
         
     #@profile
     def process(self):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
         """
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
         Takes input of 'user instruction' and returns 'matching nodes'
@@ -327,7 +327,7 @@ class Finder():
         highest_score = average_score if highest_score == 0 and average_score > 0 else highest_score
         
         threshold_limit = self.threshold_limit_percent * highest_score
-        threshold_limit = 0.01
+#         threshold_limit = 0.01
         for node in item_nodes:
             if(node['score'] >= threshold_limit) and (threshold_limit >0):
                 parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,node['search_node']['id'])
