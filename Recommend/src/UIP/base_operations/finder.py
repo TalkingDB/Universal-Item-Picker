@@ -264,7 +264,7 @@ class Finder():
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
             if user_token_matching >= 0.5:
-                total_score = user_token_matching + menu_token_matching
+                total_score = user_token_matching + menu_token_matching/2
             else:
                 total_score = 0
                 
@@ -293,7 +293,7 @@ class Finder():
             else :
                 nodes['instruction'] = node_instruction
             
-            if (average_score > highest_score) and (average_score) < 2 :
+            if (average_score > highest_score) and (average_score) < 1.5 :
                 highest_score = average_score
             nodes['score'] = average_score
             nodes['selected_options'] = selected_option_ids
@@ -327,6 +327,7 @@ class Finder():
         highest_score = average_score if highest_score == 0 and average_score > 0 else highest_score
         
         threshold_limit = self.threshold_limit_percent * highest_score
+#         threshold_limit = 0.01
         for node in item_nodes:
             if(node['score'] >= threshold_limit) and (threshold_limit >0):
                 parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,node['search_node']['id'])
@@ -462,20 +463,22 @@ class Finder():
             if len(all_nodes) > 1 :
                 for i in all_nodes :
                     node = all_nodes[i]
-                    if not (node['entity'] =='DBPedia>Comma'):
-                        if(node['type'] == 'hypergraph'):
-                            command = "process" + (node['command']).replace("CommandNet>","")
-                            if node_level == 1 and command == "processNewInstruction" :
+                    if(node['type'] == 'hypergraph'):
+                        command = "process" + (node['command']).replace("CommandNet>","")
+                        if node_level == 1 and command == "processNewInstruction" :
+                            selected_check = True
+                            selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
+                        else:
+                            data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
+                            if isinstance(data, dict) :
                                 selected_check = True
-                                selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
-                            else:
-                                data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
-                                if isinstance(data, dict) :
-                                    selected_check = True
-                                    selected_bucket = dict(selected_bucket, **data)
-                                else :
-                                    user_tokens, item_nodes = data
-                        else :
+                                selected_bucket = dict(selected_bucket, **data)
+                            else :
+                                user_tokens, item_nodes = data
+                    else :
+                        probable_commands = node['probable_commands']
+                        probable_commands_list = probable_commands.split(",")
+                        if "CommandNet>Noun" in probable_commands_list:  #whatever is being searched in catalog must be a Noun. We cannot return search results of surface_texts such as 'One, with, Comma' etc
                             token = node['entity']
                             token_list = token.split(",")
                             if "~NoTag" in token_list:
