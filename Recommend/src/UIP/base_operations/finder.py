@@ -263,7 +263,7 @@ class Finder():
             nodes["tokens"] = [x for x in nodes['tokens'] if x != '~NoTag']
             menu_token_matching = (match_score / len(nodes["tokens"]))
 
-            if user_token_matching > 0.5:
+            if user_token_matching >= 0.5:
                 total_score = user_token_matching + menu_token_matching
             else:
                 total_score = 0
