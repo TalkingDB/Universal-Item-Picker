@@ -46,7 +46,7 @@ class Finder():
         self.exhausted_node_id = []
         self.size_check = False
         self.concept_space = "foodweasel.com"
-        self.threshold_limit_percent = 0.55
+        self.threshold_limit_percent = 0.65
         self.deep_down_percent_decrease = 0.2
         
     def processNode(self,child_nodes):
