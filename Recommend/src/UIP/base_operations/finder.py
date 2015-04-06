@@ -324,7 +324,7 @@ class Finder():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
         selected_bucket = {}
-        highest_score = average_score if highest_score == 0 and average_score > 0 else 0
+        highest_score = average_score if highest_score == 0 and average_score > 0 else highest_score
         
         threshold_limit = self.threshold_limit_percent * highest_score
         for node in item_nodes:
