@@ -21,6 +21,11 @@ class Recommendation():
     
     #@profile
     def generateRecommendation(self,params):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+        
         import datetime
         print '[' + str(datetime.datetime.now()) + '] received query in recommendation.py/generateRecommendation'
         self.__generateVariables(params)
@@ -65,11 +70,6 @@ class Recommendation():
                             highest_score_for_particular_instruction[instruction] = store_item['score']
             
             store_score = sum(highest_score_for_particular_instruction.values())
-                
-#             import sys
-#             sys.path.append("/usr/lib/python2.7/pysrc")
-#             import pydevd
-#             pydevd.settrace('61.12.32.122', port = 5678)
             
             store['score'] = store_score
             tmp_stores_and_items.append(store)
