@@ -118,11 +118,6 @@ class Finder():
         
     #@profile
     def process(self):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
-        
         """
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
         Takes input of 'user instruction' and returns 'matching nodes'
@@ -437,10 +432,6 @@ class Finder():
     
     def processNewInstruction(self,parent_node,return_item_nodes = True, subject_check = False):
         # @TODO : Logic for new instruction need to be created.
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)        
         user_tokens = []
         item_nodes = []
 
