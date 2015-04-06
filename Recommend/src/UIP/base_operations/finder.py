@@ -248,7 +248,8 @@ class Finder():
 #         pydevd.settrace('61.12.32.122', port = 5678)
         
         highest_score = 0
-    
+        average_score = 0
+        
         for nodes in item_nodes:
             # print nodes
             list_index = item_nodes.index(nodes)
