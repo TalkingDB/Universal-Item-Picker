@@ -460,37 +460,38 @@ class Finder():
 #         print node_level
 #         print len(all_nodes)
 #         exit()
-
+        all_nodes.remove
         if node_level == 0 or node_level == 1 :
             selected_check = False
             selected_bucket = {}
             if len(all_nodes) > 1 :
                 for i in all_nodes :
                     node = all_nodes[i]
-                    if(node['type'] == 'hypergraph'):
-                        command = "process" + (node['command']).replace("CommandNet>","")
-                        if node_level == 1 and command == "processNewInstruction" :
-                            selected_check = True
-                            selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
-                        else:
-                            data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
-                            if isinstance(data, dict) :
+                    if not (node['entity'] =='DBPedia>Comma'):
+                        if(node['type'] == 'hypergraph'):
+                            command = "process" + (node['command']).replace("CommandNet>","")
+                            if node_level == 1 and command == "processNewInstruction" :
                                 selected_check = True
-                                selected_bucket = dict(selected_bucket, **data)
-                            else :
-                                user_tokens, item_nodes = data
-                    else :
-                        token = node['entity']
-                        token_list = token.split(",")
-                        if "~NoTag" in token_list:
-                            token_list = token_list.remove("~NoTag")
-                        
-                        if token_list is None:
-                            token_list = []    
-                        
-                        user_tokens = user_tokens + token_list
-                        if token_list :
-                            item_nodes = item_nodes + self.findItemNodes(token_list)
+                                selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
+                            else:
+                                data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
+                                if isinstance(data, dict) :
+                                    selected_check = True
+                                    selected_bucket = dict(selected_bucket, **data)
+                                else :
+                                    user_tokens, item_nodes = data
+                        else :
+                            token = node['entity']
+                            token_list = token.split(",")
+                            if "~NoTag" in token_list:
+                                token_list = token_list.remove("~NoTag")
+                            
+                            if token_list is None:
+                                token_list = []    
+                            
+                            user_tokens = user_tokens + token_list
+                            if token_list :
+                                item_nodes = item_nodes + self.findItemNodes(token_list)
             else :
                 node = all_nodes.values()[0]
 #                 print node
