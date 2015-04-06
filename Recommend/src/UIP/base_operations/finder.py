@@ -463,20 +463,22 @@ class Finder():
             if len(all_nodes) > 1 :
                 for i in all_nodes :
                     node = all_nodes[i]
-                    if not (node['entity'] =='DBPedia>Comma'):
-                        if(node['type'] == 'hypergraph'):
-                            command = "process" + (node['command']).replace("CommandNet>","")
-                            if node_level == 1 and command == "processNewInstruction" :
+                    if(node['type'] == 'hypergraph'):
+                        command = "process" + (node['command']).replace("CommandNet>","")
+                        if node_level == 1 and command == "processNewInstruction" :
+                            selected_check = True
+                            selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
+                        else:
+                            data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
+                            if isinstance(data, dict) :
                                 selected_check = True
-                                selected_bucket = dict(selected_bucket, **self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes))
-                            else:
-                                data = self.processNodeOfNewInstruction(node,return_item_nodes, user_tokens, item_nodes)
-                                if isinstance(data, dict) :
-                                    selected_check = True
-                                    selected_bucket = dict(selected_bucket, **data)
-                                else :
-                                    user_tokens, item_nodes = data
-                        else :
+                                selected_bucket = dict(selected_bucket, **data)
+                            else :
+                                user_tokens, item_nodes = data
+                    else :
+                        probable_commands = node['probable_commands']
+                        probable_commands_list = probable_commands.split(",")
+                        if "CommandNet>Noun" in probable_commands_list:  #whatever is being searched in catalog must be a Noun. We cannot return search results of surface_texts such as 'One, with, Comma' etc
                             token = node['entity']
                             token_list = token.split(",")
                             if "~NoTag" in token_list:
