@@ -118,10 +118,10 @@ class Finder():
         
     #@profile
     def process(self):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
         
         """
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
@@ -319,10 +319,10 @@ class Finder():
 
 #         pydevd.settrace('61.12.32.122', port = 5678)
 
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
         selected_bucket = {}
         highest_score = average_score if highest_score == 0 and average_score > 0 else highest_score
         
