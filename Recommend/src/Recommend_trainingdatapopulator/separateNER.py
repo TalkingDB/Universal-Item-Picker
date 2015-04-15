@@ -56,7 +56,7 @@ class separateNER():
         res = self.graphdblib.executeQuery(cyp)
         for x in res:
             try:
-                name = (x.values[0].get_cached_properties()['name']).strip()
+                name = (x.values[0].get_properties()['name']).strip()
                 print name
                 resExp = self.explain.processExplanation(name,"foodweasel.com",x.values[0]._id)
                 self.dbObj.create(rel(self.dbObj.node(x.values[0]._id),'token',self.dbObj.node(resExp)))

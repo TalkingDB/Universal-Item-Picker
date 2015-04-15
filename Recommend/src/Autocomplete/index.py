@@ -42,13 +42,13 @@ class Autocomplete(object):
         has = {}
         for row in rows:
             node = row.item_nodes
-            has_name = ((row.has_nodes).get_cached_properties())['name']
+            has_name = ((row.has_nodes).get_properties())['name']
             has_relation = row.relation
             has_relation_start_node = node._id #has_relation.start_node._id
-            has_relation_properties = has_relation.get_cached_properties()
+            has_relation_properties = has_relation.get_properties()
             
             if not has_relation_start_node in has:
-                has.update({has_relation_start_node: node.get_cached_properties()})
+                has.update({has_relation_start_node: node.get_properties()})
                 has[has_relation_start_node]['properties'] = {}
             properties = self.__prepareProperties({has_name: has_relation_properties})
             has[has_relation_start_node]['properties'].update(properties)
@@ -128,7 +128,7 @@ class Autocomplete(object):
                 current_id = node._id
                 has = {}
                 if current_id not in done_nodes:
-                    properties = node.get_cached_properties()
+                    properties = node.get_properties()
                     
                     if token_check:
                         if properties['type'] <> 'hypergraph':
@@ -176,8 +176,8 @@ class Autocomplete(object):
         
         has = {}
         for relation in node.match_outgoing(relation_type):
-            relation_name = relation.end_node.get_cached_properties()['name']
-            relation_properties = relation.get_cached_properties()
+            relation_name = relation.end_node.get_properties()['name']
+            relation_properties = relation.get_properties()
             has[relation_name] = self.__prepareSingleProperties(relation_properties)
             
         return has
