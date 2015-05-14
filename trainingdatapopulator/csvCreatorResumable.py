@@ -352,7 +352,16 @@ class csvCreator():
                     nodeWriter.writerow(row)
                     
                 for relRow in self.finalRels:
-                    relWriter.writerow(relRow)
+                    try:
+                        relWriter.writerow(relRow)
+                    except UnicodeEncodeError:
+                        for data in relRow:
+                            relRow = []
+                            if isinstance(data, unicode):
+                                relRow.append(data.encode("utf-8"))
+                            else:
+                                relRow.append(data)
+                        relWriter.writerow(relRow)
             
             print "Please Don't break at this moment"
                  
