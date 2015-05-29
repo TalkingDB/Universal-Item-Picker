@@ -8,6 +8,9 @@ from Autocomplete import index as ac
 import json
 import traceback, sys
 autocomplete = ac.Autocomplete()
+import os
+root_dir_path = os.path.expanduser("~/Smarter.Codes/")
+
 
 class Autocomplete(APIView):
     """
@@ -66,15 +69,22 @@ class Autocomplete(APIView):
         return_data = {}
         return_data['data'] = []
 #         return_data['data'] = autocomplete.getCatalog(request_data)
+        res_id = str(request_data['parent']["value"])+".json"
+
+        if os.path.isfile(root_dir_path+ "customer_files/foodweasel.com/converted_files/"+res_id):
+            with open(root_dir_path+ "customer_files/foodweasel.com/converted_files/"+res_id) as data_file:
+                data = json.load(data_file)
+            return data
         try:
             return_data['data'] = autocomplete.getCatalog(request_data)
+
         except Exception as e:
             print '-'*60
             print "Autocomplete/Catalog"
             print '-'*60
-            
+
             traceback.print_exc(file=sys.stdout)
             print '-'*60
             return_data['error'] = "Error: "+ str(e)
-            
+
         return return_data
