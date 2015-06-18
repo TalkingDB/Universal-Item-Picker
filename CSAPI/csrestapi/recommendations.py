@@ -1,4 +1,5 @@
 import json
+import subprocess
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -56,6 +57,8 @@ class Recommendation(APIView):
         if action == "generate":
             request_data['parent'] = json.loads(request.DATA['parent'])
             request_data['instruction'] = (request.DATA['instruction']).encode("utf-8")
+        if action == "restartCSAPI":
+            subprocess.call('screen -dmS csapi bash -c "sh /home/anil.gautam/Smarter.Codes/src/run-restart-cs.sh"',shell=True) #kill the system process running on requested port
             
         
         method = getattr(self, action)
@@ -66,3 +69,9 @@ class Recommendation(APIView):
             'conceptspace': conceptspace
         })
         return Response(content)
+
+    def restartCSAPI(self, request):
+        data = {}
+        data['data'] ="ok" 
+        return data;
+        
