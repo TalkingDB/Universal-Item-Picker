@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 import org.neo4j.batchimport.importer.ChunkerLineData;
 import org.neo4j.batchimport.importer.CsvLineData;
 import org.neo4j.batchimport.importer.RelType;
@@ -47,8 +48,7 @@ public class Neo2 {
             String storeDir = "/home/anil.gautam/Smarter.Codes/src/Universal_Item_Picker/batch_importer/target/graph.db/";
             //deleteDir(new File(storeDir));
             inserter = BatchInserters.inserter(storeDir);
-            BufferedReader readbuffer = new BufferedReader(new FileReader("/home/anil.gautam/Smarter.Codes/src/Universal_Item_Picker/batch_importer/nodes.csv"));
-
+            CSVReader readbuffer = new CSVReader(new FileReader("/home/anil.gautam/Smarter.Codes/src/Universal_Item_Picker/batch_importer/nodes.csv"), '\t', '"', 0);
             String strRead, relRead;
             Map nodes = new HashMap();
             String name = null, label = null, uid = null, type = null,
@@ -58,10 +58,9 @@ public class Neo2 {
             String entity_list[] = null;
             Long start = null, end = null;
             int a = -1;
-            while ((strRead = readbuffer.readLine()) != null) {
+            String[] splitarray;
+             while ((splitarray = readbuffer.readNext()) != null) {
                 if (a >= 0) {
-
-                    String splitarray[] = strRead.split("\t");
                     Map<String, Object> properties = new HashMap<>();
                     if (splitarray.length > 0) {
                         name = splitarray[0];
@@ -122,56 +121,56 @@ public class Neo2 {
             BufferedReader readrelbuffer;
             CSVReader reader = new CSVReader(new FileReader("/home/anil.gautam/Smarter.Codes/src/Universal_Item_Picker/batch_importer/rels.csv"), '\t', '"', 0);
             int rel = -1;
-            String[] splitarray;
-            while ((splitarray = reader.readNext()) != null) {
-                if (splitarray != null) {
+            String[] splitarray2;
+            while ((splitarray2 = reader.readNext()) != null) {
+                if (splitarray2 != null) {
                     rel += 1;
-                     if (splitarray[0] != null && !splitarray[0].isEmpty()) {
-                    if (rel > 0) {
-                        if (splitarray.length > 0) {
-                            start = Long.parseLong(splitarray[0]);
-                        }
-                        if (splitarray.length > 1) {
-                            end = Long.parseLong(splitarray[1]);
-                        }
-                        if (splitarray.length > 2) {
-                            rel_type = splitarray[2];
-                        }
-                        if (splitarray.length > 3) {
-                            unit = splitarray[3];
-                        }
-                        if (splitarray.length > 4) {
-                            value = splitarray[4];
-                        }
-                        if (splitarray.length > 5) {
-                            param = splitarray[5];
-                        }
-  final RelType relType = new RelType();
-         final RelType knows = relType.update(rel_type);
+                    if (splitarray2[0] != null && !splitarray2[0].isEmpty()) {
+                        if (rel > 0) {
+                            if (splitarray2.length > 0) {
+                                start = Long.parseLong(splitarray2[0]);
+                            }
+                            if (splitarray2.length > 1) {
+                                end = Long.parseLong(splitarray2[1]);
+                            }
+                            if (splitarray2.length > 2) {
+                                rel_type = splitarray2[2];
+                            }
+                            if (splitarray2.length > 3) {
+                                unit = splitarray2[3];
+                            }
+                            if (splitarray2.length > 4) {
+                                value = splitarray2[4];
+                            }
+                            if (splitarray2.length > 5) {
+                                param = splitarray2[5];
+                            }
+                            final RelType relType = new RelType();
+                            final RelType knows = relType.update(rel_type);
 //                        RelationshipType knows = DynamicRelationshipType.withName(rel_type);
-                        Map<String, Object> properties = new HashMap<>();
-                        if (value != null && !value.isEmpty()) {
-                            properties.put("value", value);
-                        }
-                        if (unit != null && !unit.isEmpty()) {
-                            properties.put("unit", unit);
-                        }
-                        if (param != null && !param.isEmpty()) {
-                            properties.put("param", param);
-                        }
-                        if (properties.size() == 0) {
-                            properties = null;
-                        }
-                        Map<String, Object> start_properties = new HashMap<>();
-                        Map<String, Object> end_properties = new HashMap<>();
-                        start_properties = inserter.getNodeProperties(start);
+                            Map<String, Object> properties = new HashMap<>();
+                            if (value != null && !value.isEmpty()) {
+                                properties.put("value", value);
+                            }
+                            if (unit != null && !unit.isEmpty()) {
+                                properties.put("unit", unit);
+                            }
+                            if (param != null && !param.isEmpty()) {
+                                properties.put("param", param);
+                            }
+                            if (properties.size() == 0) {
+                                properties = null;
+                            }
+                            Map<String, Object> start_properties = new HashMap<>();
+                            Map<String, Object> end_properties = new HashMap<>();
+                            start_properties = inserter.getNodeProperties(start);
 //                        System.out.println("end is "+end);
-                        end_properties = inserter.getNodeProperties(end);
+                            end_properties = inserter.getNodeProperties(end);
 //                        System.out.println(start_properties);
 //                        System.out.println(end_properties);
-                        if (start_properties.size() > 0 && end_properties.size() > 0) {
-                        inserter.createRelationship(start, end, knows, properties);
-                        }
+                            if (start_properties.size() > 0 && end_properties.size() > 0) {
+                                inserter.createRelationship(start, end, knows, properties);
+                            }
                         }
                     }
                 }
@@ -193,17 +192,18 @@ public class Neo2 {
         }
         return labels;
     }
-public static boolean deleteDir(File dir) {
-      if (dir.isDirectory()) {
-         String[] children = dir.list();
-         for (int i = 0; i < children.length; i++) {
-            boolean success = deleteDir
-            (new File(dir, children[i]));
-            if (!success) {
-               return false;
+
+    public static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
             }
-         }
-      }
-      return dir.delete();
-  }
+        }
+        return dir.delete();
+    }
 }
+
