@@ -43,13 +43,6 @@ class Recommendation(APIView):
         """
         sort with 'warnings' flag. the stores with no warnings will appear first
         """        
-        for tmp_return_data_child in tmp_return_data:
-            try:
-                warning = tmp_return_data_child[0]['children'][0]['children'][0]['warning']
-            except Exception as g:
-                print tmp_return_data_child[0]['children'][0]['children']
-                print g
-                
         tmp_return_data = return_data['data']
         tmp_return_data.sort(key=lambda e: e['children'][0]['children'][0]['warning'], reverse=False)
         return_data['data'] =tmp_return_data 
