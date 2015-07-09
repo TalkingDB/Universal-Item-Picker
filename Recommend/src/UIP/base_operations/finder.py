@@ -273,10 +273,10 @@ class Finder():
             # parent, and selected item would be parent along with the option selected.
 #             print nodes['search_node']
 
-            import sys
-            sys.path.append("/usr/lib/python2.7/pysrc")
-            import pydevd
-            pydevd.settrace('61.12.32.122', port = 5678)
+#             import sys
+#             sys.path.append("/usr/lib/python2.7/pysrc")
+#             import pydevd
+#             pydevd.settrace('61.12.32.122', port = 5678)
 
             if nodes['search_node']['type'] == 'option':
                 nodes,selected_option_ids = self.convertOptionToItem(nodes, total_score, selected_option_ids)
