@@ -187,7 +187,7 @@ class Finder():
             parent_id = self.finderModel.findConceptSpaceParentNode(self.concept_space,node['search_node']['id'])
 #             print parent_id
             if node['search_node']['type'] == 'option':
-                node,total_score,selected_option_ids = self.convertOptionToItem(node, 1, {})
+                node,selected_option_ids = self.convertOptionToItem(node, 1, {})
                 node['selected_options'] = selected_option_ids
             node['not_found'] = []
             node['warning'] = {}
@@ -218,7 +218,8 @@ class Finder():
         path_length = self.finderModel.findPathLength(node['search_node']['id'],option_parent_node['search_node']['id'])
         selected_option_ids[node['search_node']['id']] = (1 - (path_length * self.deep_down_percent_decrease)) * total_score
         total_score = 0;
-        return option_parent_node,total_score,selected_option_ids
+#         return option_parent_node,total_score,selected_option_ids
+        return option_parent_node,selected_option_ids
     
     def removeSizesFromList(self,user_tokens):
         try:
@@ -278,7 +279,7 @@ class Finder():
             pydevd.settrace('61.12.32.122', port = 5678)
 
             if nodes['search_node']['type'] == 'option':
-                nodes,total_score,selected_option_ids = self.convertOptionToItem(nodes, total_score, selected_option_ids)
+                nodes,selected_option_ids = self.convertOptionToItem(nodes, total_score, selected_option_ids)
 
             total_option_score = sum(selected_option_ids.values())
             # average_score = (total_score + total_option_score) / (1 + len(selected_option_ids))
