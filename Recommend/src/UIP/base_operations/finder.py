@@ -118,10 +118,10 @@ class Finder():
         
     #@profile
     def process(self):
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
         """
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
         Takes input of 'user instruction' and returns 'matching nodes'
@@ -241,10 +241,6 @@ class Finder():
         
         
     def processSelectedNodes(self,item_nodes,user_tokens,node_instruction = None):
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
         
         highest_score = 0
         average_score = 0
@@ -275,6 +271,12 @@ class Finder():
             # Code to check if the node selected is option. If an option is selected we will find its 
             # parent, and selected item would be parent along with the option selected.
 #             print nodes['search_node']
+
+            import sys
+            sys.path.append("/usr/lib/python2.7/pysrc")
+            import pydevd
+            pydevd.settrace('61.12.32.122', port = 5678)
+
             if nodes['search_node']['type'] == 'option':
                 nodes,total_score,selected_option_ids = self.convertOptionToItem(nodes, total_score, selected_option_ids)
 
