@@ -118,10 +118,6 @@ class Finder():
         
     #@profile
     def process(self):
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
         """
         Main function in finder.py module which gets called first, and calls rest all functions in finder.py
         Takes input of 'user instruction' and returns 'matching nodes'
@@ -142,6 +138,18 @@ class Finder():
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
 
         final_bucket = {}
+
+        
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+        if selected_nodes :
+            for i in selected_nodes :
+                if i not in final_bucket :
+                    final_bucket[i] = selected_nodes[i]
+        
+
         if pass_bucket :
             for i in pass_bucket :
                 if i in selected_nodes :
@@ -149,11 +157,6 @@ class Finder():
                 else :
                     final_bucket[i] = pass_bucket[i]
                     
-        if selected_nodes :
-            for i in selected_nodes :
-                if i not in final_bucket :
-                    final_bucket[i] = selected_nodes[i]
-        
         return final_bucket
     
     def getAllExactMatchNodes(self, text):
