@@ -146,16 +146,16 @@ class Finder():
                     final_bucket[i] = selected_nodes[i]
         
 
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
         if pass_bucket :
             for i in pass_bucket :
-                if i in selected_nodes :
-                    final_bucket[i] = pass_bucket[i] + selected_nodes[i]
-                else :
-                    final_bucket[i] = pass_bucket[i]
+#                 if i in selected_nodes :
+#                     final_bucket[i] = pass_bucket[i] + selected_nodes[i]
+#                 else :
+                final_bucket[i] = pass_bucket[i]
                     
         return final_bucket
     
