@@ -33,6 +33,7 @@ class Recommendation():
         node_ids = user_instruction.findNodeIds(self.concept_space, self.key, self.values)
         print '[' + str(datetime.datetime.now()) + '] executed findNodeIds in recommendation.py/generateRecommendation'
         decoded = self.instruction.decode("utf-8")
+        decoded = decoded.replace(".", " ")
         json_data = user_instruction.commandProcessorHit(decoded)
         print '[' + str(datetime.datetime.now()) + '] executed commandPorcessorHit in recommendation.py/generateRecommendation'
 	json_data = json_data.decode('string_escape')
