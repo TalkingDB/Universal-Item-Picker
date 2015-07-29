@@ -83,6 +83,7 @@ class InstructionParser():
         """
         for buket in bukets: #loop for each instruction
             for k, v in buket.items(): #loop for each item found in given instruction
+                v = v[:10] # pick only 15 items per store per instruction
                 if basket.has_key(k):
 
                     key = k
@@ -105,9 +106,12 @@ class InstructionParser():
         """
         for each new store, create a new thread
         """
+        stores_count = 0
         for parent_id, val in basket.iteritems():
             if val[0]==max_value:
                 myQueue.put((parent_id,val))
+                stores_count = stores_count + 1
+                if stores_count > 50: break
                 
         while not myQueue.empty():
             data = myQueue.get()

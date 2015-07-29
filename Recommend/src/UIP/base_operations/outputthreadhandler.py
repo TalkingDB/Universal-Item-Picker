@@ -32,7 +32,6 @@ class OutputThreadHandler(threading.Thread):
     def run(self):
         threadLimiter.acquire()
         self.cond.acquire()
-        print "Output Thread"
         try :
             store_details = self.process()
             self.finished_queue.put((self.parent_id, store_details))
@@ -47,6 +46,8 @@ class OutputThreadHandler(threading.Thread):
     #@profile
     def process(self):
         store_details, store_properties = self.finderModel.getNodeDetails(self.parent_id)
+        print "Output Thread - of Restaurant ID " + store_details['uid']
+        
         store_details['properties'] = store_properties
         all_node_ids = []
         duplicate_node_ids = []
