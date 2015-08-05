@@ -675,6 +675,10 @@ class Finder():
             
         return user_tokens, item_nodes
     
+    def processTemperatureOfMeat(self,parent_node, return_item_nodes = True):
+        return processAlongWith(parent_node,return_item_nodes)
+
+    
     def processQuantityOrSizeOf(self,parent_node):
         user_tokens = []
         item_nodes = []
