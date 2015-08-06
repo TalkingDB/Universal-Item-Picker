@@ -680,7 +680,7 @@ class Finder():
         sys.path.append("/usr/lib/python2.7/pysrc")
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
-        return processAlongWith(parent_node,return_item_nodes)
+        return self.processAlongWith(parent_node,return_item_nodes)
 
     
     def processQuantityOrSizeOf(self,parent_node):
