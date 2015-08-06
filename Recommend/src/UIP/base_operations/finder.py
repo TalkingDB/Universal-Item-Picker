@@ -676,6 +676,10 @@ class Finder():
         return user_tokens, item_nodes
     
     def processTemperatureOfMeat(self,parent_node, return_item_nodes = True):
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
         return processAlongWith(parent_node,return_item_nodes)
 
     
