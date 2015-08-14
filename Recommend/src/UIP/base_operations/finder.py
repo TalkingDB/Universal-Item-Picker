@@ -48,6 +48,7 @@ class Finder():
         self.concept_space = "foodweasel.com"
         self.threshold_limit_percent = 0.8
         self.deep_down_percent_decrease = 0.2
+        self.special_instruction_starts_from_word_id = -1
         
     def processNode(self,child_nodes):
         """
@@ -86,7 +87,7 @@ class Finder():
         """ Take input of a CommandNet Hypergraph. Execute the corresponding programming function of CommandNet Hypergraph
         """
         if parent_node['type'] == 'token':
-            token = parent_node['entity']
+            token = parent_node['entity'] 
             user_tokens = token.split(",")
             if "~NoTag" in user_tokens:
                     user_tokens = user_tokens.remove("~NoTag")
@@ -94,6 +95,7 @@ class Finder():
                 user_tokens = []
                 item_nodes = []
             else:    
+                self.special_instruction_starts_from_word_id = parent_node['end']
                 item_nodes = self.findItemNodes(user_tokens)
         else:    
             command = "process" + (parent_node['command']).replace("CommandNet>","")
@@ -495,6 +497,7 @@ class Finder():
                             
                             user_tokens = user_tokens + token_list
                             if token_list :
+                                self.special_instruction_starts_from_word_id = node['end']
                                 item_nodes = item_nodes + self.findItemNodes(token_list)
             else :
                 node = all_nodes.values()[0]
@@ -530,6 +533,7 @@ class Finder():
 #                     print self.findItemNodes(token_list)
 #                     exit()
                     if token_list and return_item_nodes :
+                        self.special_instruction_starts_from_word_id = node['end']
                         item_nodes = item_nodes + self.findItemNodes(token_list)
                     
             if selected_check:
@@ -627,6 +631,7 @@ class Finder():
             
             user_tokens = user_tokens + token_list
             if token_list and return_item_nodes:
+                self.special_instruction_starts_from_word_id = node['end']
                 item_nodes = item_nodes + self.findItemNodes(token_list)
         
         return user_tokens, item_nodes
@@ -657,6 +662,7 @@ class Finder():
             token_list = token_list.remove("~NoTag") if "~NoTag" in token_list else token_list
             user_tokens = user_tokens + token_list
             if token_list and return_item_nodes :
+                self.special_instruction_starts_from_word_id = subject_node['end']
                 item_nodes = item_nodes + self.findItemNodes(token_list)
 
         # print item_nodes
@@ -723,6 +729,7 @@ class Finder():
             token_list = token_list.remove("~NoTag") if "~NoTag" in token_list else token_list
             user_tokens = user_tokens + token_list
             if token_list and return_item_nodes :
+                self.special_instruction_starts_from_word_id = subject_node['end']
                 item_nodes = item_nodes + self.findItemNodes(token_list)
         if return_item_nodes :
             self.size_check = True
@@ -756,6 +763,7 @@ class Finder():
             token_list = token_list.remove("~NoTag") if "~NoTag" in token_list else token_list
             user_tokens = user_tokens + token_list
             if token_list and return_item_nodes :
+                self.special_instruction_starts_from_word_id = subject_node['end']
                 item_nodes = item_nodes + self.findItemNodes(token_list)
         
         if return_item_nodes :
@@ -770,13 +778,16 @@ class Finder():
         user_tokens = []
         item_nodes = []
         all_nodes = self.GL.getChildNodes(parent_node['id'])
+        tmp_special_instruction_starts_from_word_id = -1
         for i in all_nodes :
             token = all_nodes[i]['entity']
+            tmp_special_instruction_starts_from_word_id = all_nodes[i]['end'] 
             token_list = (token).split(",")
             user_tokens = user_tokens + ((token_list).remove("~NoTag") if "~NoTag" in token_list else token_list)
         
         final_nodes = []
         if return_item_nodes :
+            self.special_instruction_starts_from_word_id = tmp_special_instruction_starts_from_word_id
             item_nodes = item_nodes + self.findItemNodes(user_tokens)
             for node in item_nodes:
                 if(set(user_tokens).intersection(set(node['tokens'])) == set(user_tokens)):
@@ -885,6 +896,7 @@ class Finder():
             token_list = token_list.remove("~NoTag") if "~NoTag" in token_list else token_list
             user_tokens = user_tokens + token_list
             if token_list and return_item_nodes:
+                self.special_instruction_starts_from_word_id = subject_node['end']
                 item_nodes = item_nodes + self.findItemNodes(token_list)
             
         
@@ -934,6 +946,7 @@ class Finder():
                 token_list = token_list.remove("~NoTag") if "~NoTag" in token_list else token_list
                 user_tokens = user_tokens + token_list
                 if token_list :
+                    self.special_instruction_starts_from_word_id = all_nodes[i]['end']
                     item_nodes = item_nodes + self.findItemNodes(token_list)
 
         return user_tokens, item_nodes
