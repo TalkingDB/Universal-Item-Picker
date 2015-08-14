@@ -135,10 +135,7 @@ class Finder():
             return dict(pass_bucket, **return_data)
         else :
             user_tokens, item_nodes = return_data
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
@@ -159,6 +156,11 @@ class Finder():
 #                 else :
                 final_bucket[i] = pass_bucket[i]
                     
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
+
         return final_bucket
     
     def getAllExactMatchNodes(self, text):
