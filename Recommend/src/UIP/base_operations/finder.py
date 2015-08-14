@@ -133,6 +133,10 @@ class Finder():
             return dict(pass_bucket, **return_data)
         else :
             user_tokens, item_nodes = return_data
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
         item_nodes = self.processSearchedNode(user_tokens,item_nodes)
 
         selected_nodes = self.processSelectedNodes(item_nodes,user_tokens)
@@ -146,10 +150,6 @@ class Finder():
                     final_bucket[i] = selected_nodes[i]
         
 
-#         import sys
-#         sys.path.append("/usr/lib/python2.7/pysrc")
-#         import pydevd
-#         pydevd.settrace('61.12.32.122', port = 5678)
         if pass_bucket :
             for i in pass_bucket :
 #                 if i in selected_nodes :
