@@ -944,6 +944,10 @@ class Finder():
         # exit()
         separated_node_ids = ",".join(str(x) for x in self.node_ids)
         item_data = self.finderModel.findNodesByNodeIds(separated_node_ids,tokens,self.pass_bucket_id)
+        import sys
+        sys.path.append("/usr/lib/python2.7/pysrc")
+        import pydevd
+        pydevd.settrace('61.12.32.122', port = 5678)
         return item_data
     
     
