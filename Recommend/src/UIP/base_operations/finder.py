@@ -171,8 +171,8 @@ class Finder():
         """
         special_instruction = ""
         for child_node in self.current_instruction_child_node_IDs:
-            if self.GL.G.node[child_node]['start'] > self.special_instruction_starts_from_word_id :
-                if self.GL.G.node[child_node]['type'] == 'token' :
+            if self.GL.G.node[child_node]['type'] == 'token' :
+                if self.GL.G.node[child_node]['start'] > self.special_instruction_starts_from_word_id :
                     special_instruction = special_instruction + self.GL.G.node[child_node]['type'] + " " 
         
         return final_bucket,special_instruction
