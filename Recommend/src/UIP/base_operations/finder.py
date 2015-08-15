@@ -160,15 +160,22 @@ class Finder():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
 
-        self.deepest_child_iterator([self.instruction['id']])
-        for child_node in self.current_instruction_child_node_IDs:
-            print child_node
-            for i in self.GL.G.neighbors(child_node):
-                print i
+        """
+        compute the current user instruction string by concatinating the label of each child node of current user instruction
+        """
+        self.deepest_child_iterator([self.instruction['id']]) #current user instruction's entire nodes will be filled inside a python list named 'current_instruction_child_node_IDs'
+        self.current_instruction_child_node_IDs.sort() #child nodes of current user's instruction were in jumbled order, so sort them so that while extracting label from each node - we get the labels in right order
         
-#         special_instruction =
-        # TODO SpecialInstruction: Compute special_instruction above by looping throguh self.instruction (assuming it does contains word id of each word). Pick those word IDs which exist after self.special_instruction_starts_from_word_id + 1  
-        return final_bucket # TODO SpecialInstruction: Than returning just final_bucket now return a tuple of (final_bucket,special_instruction)
+        """
+        compute special_instruction by looping through current user instruction and extracting labels from that particular word-id till which ITEM exists
+        """
+        special_instruction = ""
+        for child_node in self.current_instruction_child_node_IDs:
+            if self.GL.G.node[child_node]['start'] > self.special_instruction_starts_from_word_id :
+                if self.GL.G.node[child_node]['type'] == 'token' :
+                    special_instruction = special_instruction + self.GL.G.node[child_node]['type'] + " " 
+        
+        return final_bucket,special_instruction
     
     def deepest_child_iterator(self,parent_node_IDs):
         for parent_node_ID in parent_node_IDs:
