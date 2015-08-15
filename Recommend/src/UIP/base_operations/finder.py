@@ -160,7 +160,7 @@ class Finder():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
 
-        self.deepest_child_iterator(self.instruction['id'])
+        self.deepest_child_iterator([self.instruction['id']])
         for child_node in self.current_instruction_child_node_IDs:
             print child_node
         

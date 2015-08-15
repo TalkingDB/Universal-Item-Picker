@@ -39,10 +39,10 @@ class InstructionParser():
         """
         for each instruction. create a new thread
         """
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)        
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)        
         for i in all_instruction:
             myQueue.put((all_instruction[i],i))
             self.all_instruction_labels.append(all_instruction[i]['label'])
