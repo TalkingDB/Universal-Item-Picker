@@ -28,7 +28,7 @@ class Recommendation(APIView):
 	t1 = time.time()
 	try:
             r = recommendation.Recommendation()
-            return_data['data'] = r.generateRecommendation(request_data)
+            return_data['data'] = r.generateRecommendation(request_data) #TODO SpecialInstruction: Instead of returning just the prepareList, now we also return special_instructions list. return it here
         except Exception as e:
             print '-'*60
             print "Recommendation/generate"

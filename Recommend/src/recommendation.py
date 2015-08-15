@@ -40,12 +40,12 @@ class Recommendation():
     	json_data = json_data.decode('string_escape')
         json_data = json_data.replace('&gt;','>')
         instruction_parser = instructionparser.InstructionParser()
-        result_stores_and_their_items_with_options = instruction_parser.parseInstruction(node_ids,json_data, self.concept_space)
+        result_stores_and_their_items_with_options = instruction_parser.parseInstruction(node_ids,json_data, self.concept_space) #TODO SpecialInstruction: Instead of returning just the prepareList, now we also return special_instructions list. capture that too
         print '[' + str(datetime.datetime.now()) + '] executed parseInstruction in recommendation.py/generateRecommendation'
         
         sorted_stores = self.__sortStoreWithScore(result_stores_and_their_items_with_options)
         
-        return sorted_stores
+        return sorted_stores #TODO SpecialInstruction: Instead of returning just the prepareList, now we also return special_instructions list. return it here
     
     def __generateVariables(self,params):
         self.concept_space = params['concept_space']

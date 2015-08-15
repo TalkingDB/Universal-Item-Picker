@@ -32,7 +32,7 @@ class InstructionParser():
         self.GL = gl.GraphLib() 
         self.GL.G = self.GL.parseGML(user_instruction)
         self.finderModel = finder_model.FinderModel(GraphDatabase)
-        all_instruction = self.GL.getInstructions()
+        all_instruction = self.GL.getInstructions() #TODO SpecialInstruction: verify whether all wordIDs are contained in all_instruction. If they are, it would be easy to loop through each word ID and concatinate special instruction
 #         print "here", all_instruction
 #         exit()
         self.all_instruction_labels = []
@@ -44,12 +44,12 @@ class InstructionParser():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)        
         for i in all_instruction:
-            myQueue.put(all_instruction[i])
+            myQueue.put((all_instruction[i],i))
             self.all_instruction_labels.append(all_instruction[i]['label'])
         processed_instruction = []
         while not myQueue.empty():
-            instruction = myQueue.get()
-            finder_obj = threadhandler.ThreadHandler(node_ids,instruction,myQueue,self.GL,finished_queue)
+            instruction,instruction_index = myQueue.get()
+            finder_obj = threadhandler.ThreadHandler(node_ids,instruction,instruction_index,myQueue,self.GL,finished_queue)
             finder_obj.start()
 #             exit()
 #             processed_instruction.append(finder_obj.getData())
@@ -59,19 +59,16 @@ class InstructionParser():
             # exit()
         myQueue.join()
         while not finished_queue.empty():
-            data = finished_queue.get()
+            data,instruction_index = finished_queue.get() #TODO SpecialInstruction: Than just data, instruction_index, now we would also be returning special_instruction
 #             print data
             if data:
-                processed_instruction.append(data)
+                processed_instruction.append((data,instruction_index))#TODO SpecialInstruction: Than just data, instruction_index, now we would also be returning special_instruction
             finished_queue.task_done()
-#         print self.getShortlistedParent(processed_instruction, concept_space)
-#         exit()
-#         print processed_instruction
-#         exit()
-  
+
+        #TODO SpecialInstruction: Sort process_instruction with instruction_index. This way all restaurants will show their results in the same sort order as the user typed his instructions  
         """
         Items found. Find their store details now 
-        """
+        """       
         if processed_instruction:
             return self.getShortlistedParent(processed_instruction, concept_space)
         else:
@@ -85,8 +82,9 @@ class InstructionParser():
         """
         group items by their store ID
         """
-        for buket in bukets: #loop for each instruction
-            for k, v in buket.items(): #loop for each item found in given instruction
+        for tuple_of_bucket_data_and_instruction_index in bukets: #loop for each instruction
+            bucket_data , instruction_index = tuple_of_bucket_data_and_instruction_index #TODO SpecialInstruction: Than just data, instruction_index, now we would also be returning special_instruction.
+            for k, v in bucket_data.items(): #loop for each item found in given instruction
                 v = v[:10] # pick only 15 items per store per instruction
                 if basket.has_key(k):
 
@@ -98,6 +96,8 @@ class InstructionParser():
                     basket[key] = (count, val)
                 else:
                     basket[k] = (1, v)
+            
+            #TODO SpecialInstrucion: create a new list called 'special_instructions'. Append in it the special_instruction. Because we are already sorted by instruction_index hence automatically we will save the correspending special_instruction against the instruction_index's list index 
 
 #         import sys
 #         sys.path.append("/usr/lib/python2.7/pysrc")
@@ -135,7 +135,7 @@ class InstructionParser():
 #         import pydevd
 #         pydevd.settrace('61.12.32.122', port = 5678)
 
-        return self.prepareList(store.values())
+        return self.prepareList(store.values()) #TODO SpecialInstruction: Instead of returning just the prepareList, now also return special_instructions list
     
     def prepareList(self,hierarchy):
 #         print hierarchy
