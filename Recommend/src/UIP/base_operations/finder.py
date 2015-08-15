@@ -36,6 +36,8 @@ class Finder():
 #         print instruction['label']
 #         exit()
         self.GL = GL
+        self.current_instruction_child_node_IDs = []
+
         
 #        self.GL.G = self.GL.parseGML(instruction)
         self.instruction = instruction
@@ -158,12 +160,18 @@ class Finder():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
 
-        for vertex_iterator,vertex_data_iterator in self.GL.G.nodes_iter(data=True):
-            print vertex_data_iterator['type']
+        self.deepest_child_iterator(self.instruction['id'])
+        for child_node in self.current_instruction_child_node_IDs:
+            print child_node
         
 #         special_instruction =
         # TODO SpecialInstruction: Compute special_instruction above by looping throguh self.instruction (assuming it does contains word id of each word). Pick those word IDs which exist after self.special_instruction_starts_from_word_id + 1  
         return final_bucket # TODO SpecialInstruction: Than returning just final_bucket now return a tuple of (final_bucket,special_instruction)
+    
+    def deepest_child_iterator(self,parent_node_IDs):
+        for parent_node_ID in parent_node_IDs:
+            self.current_instruction_child_node_IDs.append(parent_node_ID)
+            self.deepest_child_iterator(self.GL.getChildNodes(parent_node_ID))
     
     def getAllExactMatchNodes(self, text):
         separated_node_ids = ",".join(str(x) for x in self.node_ids)
