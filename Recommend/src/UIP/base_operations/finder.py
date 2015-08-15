@@ -163,6 +163,8 @@ class Finder():
         self.deepest_child_iterator([self.instruction['id']])
         for child_node in self.current_instruction_child_node_IDs:
             print child_node
+            if self.GL.G[child_node]['type'] == 'entity':
+                print self.GL.G[child_node]['label']
         
 #         special_instruction =
         # TODO SpecialInstruction: Compute special_instruction above by looping throguh self.instruction (assuming it does contains word id of each word). Pick those word IDs which exist after self.special_instruction_starts_from_word_id + 1  
