@@ -47,6 +47,7 @@ class InstructionParser():
             myQueue.put((all_instruction[i],i))
             self.all_instruction_labels.append(all_instruction[i]['label'])
         processed_instruction = []
+        
         while not myQueue.empty():
             instruction,instruction_index = myQueue.get()
             finder_obj = threadhandler.ThreadHandler(node_ids,instruction,instruction_index,myQueue,self.GL,finished_queue)

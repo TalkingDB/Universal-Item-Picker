@@ -158,6 +158,9 @@ class Finder():
         import pydevd
         pydevd.settrace('61.12.32.122', port = 5678)
 
+        for vertex_iterator,vertex_data_iterator in self.GL.G.nodes_iter(data=True):
+            print vertex_data_iterator['type']
+        
 #         special_instruction =
         # TODO SpecialInstruction: Compute special_instruction above by looping throguh self.instruction (assuming it does contains word id of each word). Pick those word IDs which exist after self.special_instruction_starts_from_word_id + 1  
         return final_bucket # TODO SpecialInstruction: Than returning just final_bucket now return a tuple of (final_bucket,special_instruction)
