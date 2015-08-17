@@ -168,14 +168,14 @@ class Finder():
         for child_node in self.current_instruction_child_node_IDs:
             if self.GL.G.node[child_node]['type'] == 'token' :
                 if self.GL.G.node[child_node]['start'] > self.special_instruction_starts_from_word_id :
-                    special_instruction = special_instruction + self.GL.G.node[child_node]['type'] + " " 
+                    special_instruction = special_instruction + self.GL.G.node[child_node]['label'] + " " 
         
-        import sys
-        sys.path.append("/usr/lib/python2.7/pysrc")
-        import pydevd
-        pydevd.settrace('61.12.32.122', port = 5678)
+#         import sys
+#         sys.path.append("/usr/lib/python2.7/pysrc")
+#         import pydevd
+#         pydevd.settrace('61.12.32.122', port = 5678)
 
-        return final_bucket#,special_instruction
+        return final_bucket,special_instruction
     
     def deepest_child_iterator(self,parent_node_IDs):
         for parent_node_ID in parent_node_IDs:
