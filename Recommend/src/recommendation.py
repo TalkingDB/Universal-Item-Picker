@@ -45,9 +45,9 @@ class Recommendation():
         result_stores_and_their_items_with_options = instruction_parser.parseInstruction(node_ids,json_data, self.concept_space) #TODO SpecialInstruction: Instead of returning just the prepareList, now we also return special_instructions list. capture that too
         print '[' + str(datetime.datetime.now()) + '] executed parseInstruction in recommendation.py/generateRecommendation'
         
-        sorted_stores = self.__sortStoreWithScore(result_stores_and_their_items_with_options)
+        sorted_stores, special_instructions = self.__sortStoreWithScore(result_stores_and_their_items_with_options)
         
-        return sorted_stores #TODO SpecialInstruction: Instead of returning just the prepareList, now we also return special_instructions list. return it here
+        return sorted_stores, special_instructions
     
     def __generateVariables(self,params):
         self.concept_space = params['concept_space']
