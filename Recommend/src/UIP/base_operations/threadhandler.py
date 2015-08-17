@@ -15,6 +15,7 @@ class ThreadHandler(threading.Thread):
         self.instruction = instruction
         self.instruction_index = instruction_index
         self.node_ids = node_ids
+        self.special_instruction = ""
         self.GL = GL
         self.cond = threading.Condition()
         self.done = False
@@ -27,8 +28,8 @@ class ThreadHandler(threading.Thread):
         self.cond.acquire()
         try:
             finder_obj = finder.Finder(self.node_ids,self.instruction,self.GL)
-            self.selected_bucket = finder_obj.process() #TODO SpecialInstruction : than just selected_bucket - now special_instruction will also be returned here 
-            self.finished_queue.put((self.selected_bucket,self.instruction_index)) #TODO SpecialInstruction : than just selected_bucket - now special_instruction must also be saved here
+            self.selected_bucket, self.special_instruction = finder_obj.process() 
+            self.finished_queue.put((self.selected_bucket,self.special_instruction,self.instruction_index)) #whatever we pass in PUT method here is later returned in our 'thread callee' in 'getData' function
             # time.sleep(2)
             #print "Thread completed"
         except ValueError as e:
@@ -45,4 +46,4 @@ class ThreadHandler(threading.Thread):
         while not self.done: #  <--
             self.cond.wait()#  <--  We're waiting that self.done becomes True
         self.cond.release() #  <--
-        return (self.selected_bucket,self.instruction_index)
+        return (self.selected_bucket,self.special_instruction,self.instruction_index)
