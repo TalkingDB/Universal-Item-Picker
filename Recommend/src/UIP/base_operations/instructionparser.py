@@ -84,7 +84,7 @@ class InstructionParser():
         myQueue = Queue.Queue()
         finished_queue = Queue.Queue()
         found_results_grouped_by_store = {}
-        special_instructions = []
+        special_instructions = {}
         
         """
         group items by their store ID
@@ -117,10 +117,10 @@ class InstructionParser():
             Because we are already sorted by instruction_index hence automatically we will save the
             correspending special_instruction against the instruction_index's list index
             """ 
-            special_instructions.append(special_instruction)
+            special_instructions[instruction_index]=special_instruction
 
         """
-        find stores which hax maximum amount of insutrctions met. later this number will be used to filter down store resul
+        find stores which has maximum amount of instructions met. later this number will be used to filter down store result
         """
         maximum_items_possible_in_particular_store = max(found_results_grouped_by_store.iteritems(), key=operator.itemgetter(1))[1][0]
         store = {}

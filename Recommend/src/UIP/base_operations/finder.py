@@ -800,7 +800,7 @@ class Finder():
         item_nodes = []
         all_nodes = self.GL.getChildNodes(parent_node['id'])
         tmp_special_instruction_starts_from_word_id = -1
-        for i in all_nodes :
+        for i in sorted(all_nodes) :
             token = all_nodes[i]['entity']
             tmp_special_instruction_starts_from_word_id = all_nodes[i]['end'] 
             token_list = (token).split(",")
