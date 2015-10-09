@@ -9,6 +9,7 @@ __date__ ="$16 Sep, 2014 3:13:42 PM$"
 from database import graphdb
 # from py2neo import neo4j
 from UIP.model import finder_model
+from pymongo import MongoClient
 from app import *
 import traceback
 import sys
@@ -768,8 +769,20 @@ class Finder():
         user_tokens = []
         item_nodes = []
         object_node = self.GL.getChildNodes(parent_node['id'],'param:object')
-        quantity = object_node['label']
-        
+
+        """
+        finding mathematical_value of Quantity detected
+        """
+        quantity_entity_url = object_node['entity']
+
+        mongo_client = MongoClient('localhost', 27017)
+        db = mongo_client['noisy_NER']
+        entity_collection = db.entity
+        document_returned = entity_collection.find_one({"entity_url":quantity_entity_url,"mathematical_value":{"$exists":1}})
+        mathematical_value = document_returned["mathematical_value"]
+        quantity = mathematical_value
+
+
         subject_node = self.GL.getChildNodes(parent_node['id'],'param:subject')
         if(subject_node['type'] == 'hypergraph'):
             command = "process" + (subject_node['command']).replace("CommandNet>","")

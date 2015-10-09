@@ -19,7 +19,7 @@ class FinderModel():
         query = ("MATCH (a:ConceptSpace)-[:says]->(b:ParentGroup)"
             " WHERE b."+key+" IN ['" +"','".join(values)+ "']"
             " RETURN id(b) as node_id")
-#         print query
+        # print query
 #         exit()
         data = self.GraphDatabase.execute(query)
 #         for x in data :
