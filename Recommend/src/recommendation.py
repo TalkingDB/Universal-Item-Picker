@@ -88,7 +88,7 @@ class Recommendation():
 # print '[' + str(datetime.datetime.now()) + 'started query'
 #
 # r = Recommendation()
-# found_results, special_instructions =  r.generateRecommendation({'instruction': 'two chicken sandwich with soft drink', 'parent': {u'value': ["1234"], u'key': u'uid'}, 'concept_space': u'eric_tucker'})
+# found_results, special_instructions =  r.generateRecommendation({'instruction': 'abra ka dabra', 'parent': {u'value': ["1234"], u'key': u'uid'}, 'concept_space': u'eric_tucker'})
 # print found_results
 #
 # print '[' + str(datetime.datetime.now()) + 'stopped query'

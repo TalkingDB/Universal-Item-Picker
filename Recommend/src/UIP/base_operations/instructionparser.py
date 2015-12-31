@@ -78,7 +78,7 @@ class InstructionParser():
         if found_results_grouped_by_instruction:
             return self.getShortlistedParent(found_results_grouped_by_instruction, concept_space)
         else:
-            return []
+            return [[],{}]
 
     def getShortlistedParent(self, found_results_grouped_by_instruction, concept_space):
         myQueue = Queue.Queue()
