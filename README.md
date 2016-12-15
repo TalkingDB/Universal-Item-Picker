@@ -7,3 +7,7 @@ Universal Item Picker
 4. Searches for user's search query inside persistant graph store, and returns records that match with query
 
 TODO : Currently Universal Item Picker only 'picks or selects' records. It does not updates records. Update training of CommandNet Processor such that it is able to identify 'update' queries, and later add the support of updating graph store in Universal Item Picker (or maybe rename this project - because it is not longer just 'picking' records but updating them too)
+
+LICENSE
+
+This program has been made available in under the terms of the GNU Affero General Public License (AGPL). See individual files for details.
